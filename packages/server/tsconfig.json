@@ -23,7 +23,7 @@
         "emitDecoratorMetadata": true,
         "strictPropertyInitialization": false,
         "verbatimModuleSyntax": true,
-        "typeRoots": ["./node_modules/@types", "./node_modules/@abraham", "./node_modules/@ragemp-mango", "./types"],
+        "typeRoots": ["./node_modules/@types", "./node_modules/@abraham", "./node_modules/@ragemp-mango", "./node_modules/@ragempcommunity", "./types"],
         "stripInternal": true
     },
     "include": ["./src/**/*.ts", "./types/**/*.d.ts"],

@@ -30,6 +30,7 @@
     },
     "devDependencies": {
         "@ragemp-mango/core": "workspace:^",
+        "@ragempcommunity/types-server": "^2.1.8",
         "@abraham/reflection": "^0.12.0",
         "@rollup/plugin-commonjs": "^25.0.7",
         "@rollup/plugin-node-resolve": "^15.2.3",
@@ -43,7 +44,6 @@
     },
     "peerDependencies": {
         "@ragemp-mango/core": "workspace:^",
-        "@ragempcommunity/types-server": "^2.1.8",
         "inversify": "^6.0.2"
     },
     "publishConfig": {

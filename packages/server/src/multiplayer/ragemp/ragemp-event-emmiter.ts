@@ -2,41 +2,59 @@ import type { ScriptEventHandler } from '@ragemp-mango/core/app';
 import type { MultiplayerPlayer, ServerEventEmmiter } from '../../interfaces';
 import { RageMPServerScriptEvent } from './ragemp-script-event-handler';
 
+type NativeServerEvent = keyof IServerEvents;
+const NATIVE_SERVER_EVENTS = new Set<NativeServerEvent>([
+    'entityCreated',
+    'entityDestroyed',
+    'entityModelChange',
+    'incomingConnection',
+    'packagesLoaded',
+    'playerChat',
+    'playerCommand',
+    'playerDamage',
+    'playerDeath',
+    'playerEnterCheckpoint',
+    'playerEnterColshape',
+    'playerEnterVehicle',
+    'playerExitCheckpoint',
+    'playerExitColshape',
+    'playerExitVehicle',
+    'playerJoin',
+    'playerQuit',
+    'playerReachWaypoint',
+    'playerReady',
+    'playerSpawn',
+    'playerStartEnterVehicle',
+    'playerStartExitVehicle',
+    'playerStreamIn',
+    'playerStreamOut',
+    'playerWeaponChange',
+    'serverShutdown',
+    'trailerAttached',
+    'vehicleDamage',
+    'vehicleDeath',
+    'vehicleHornToggle',
+    'vehicleSirenToggle',
+]);
+
 export class ServerRageMPEventEmmiter implements ServerEventEmmiter {
-    private mapEventsShared: Record<string, string> = {
-        // Map alt:V event names to RageMP equivalents
-        'entityColShapeEnter': 'playerEnterColshape',
-        'entityColShapeLeave': 'playerExitColshape',
-        'playerVehicleEntered': 'playerEnterVehicle',
-        'playerVehicleLeft': 'playerExitVehicle',
-        'playerStartVehicleEnter': 'playerStartEnterVehicle',
-        'playerVehicleSeatChange': 'playerExitVehicle', // RageMP doesn't have seat change, closest is exit
-    };
-
-    constructor(private mapEvents: Record<string, string> = {}) {}
-
-    private getEventName(eventName: string): string {
-        return this.mapEventsShared[eventName] || this.mapEvents[eventName] || eventName;
-    }
 
     emit(eventName: string, ...args: any[]): void {
         mp.events.call(eventName, ...args);
     }
 
     on(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
-        const mappedEventName = this.getEventName(eventName);
-        mp.events.add(mappedEventName, listener);
-        return new RageMPServerScriptEvent(mappedEventName, listener);
+        mp.events.add(eventName, listener);
+        return new RageMPServerScriptEvent(eventName, listener);
     }
 
     once(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
-        const mappedEventName = this.getEventName(eventName);
         const onceWrapper = (...args: any[]) => {
-            mp.events.remove(mappedEventName, onceWrapper);
+            mp.events.remove(eventName, onceWrapper);
             listener(...args);
         };
-        mp.events.add(mappedEventName, onceWrapper);
-        return new RageMPServerScriptEvent(mappedEventName, onceWrapper);
+        mp.events.add(eventName, onceWrapper);
+        return new RageMPServerScriptEvent(eventName, onceWrapper);
     }
 
     off(eventName: string, listener: (...args: any[]) => void): void {
@@ -65,21 +83,28 @@ export class ServerRageMPEventEmmiter implements ServerEventEmmiter {
     }
 
     onPlayer(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
-        // In RageMP, client events come through the same mp.events.add
-        // The first argument is typically the player who sent the event
-        const mappedEventName = this.getEventName(eventName);
-        mp.events.add(mappedEventName, listener);
-        return new RageMPServerScriptEvent(mappedEventName, listener);
+        // Native RAGEMP events should be registered with 'on' type
+        // They are triggered by the game engine, not by client-to-server communication
+        if (NATIVE_SERVER_EVENTS.has(eventName as NativeServerEvent)) {
+            return this.on(eventName, listener);
+        }
+        // Custom client-to-server events
+        mp.events.add(eventName, listener);
+        return new RageMPServerScriptEvent(eventName, listener);
     }
 
     oncePlayer(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
-        const mappedEventName = this.getEventName(eventName);
+        // Native RAGEMP events should be registered with 'once' type
+        if (NATIVE_SERVER_EVENTS.has(eventName as NativeServerEvent)) {
+            return this.once(eventName, listener);
+        }
+        // Custom client-to-server events
         const onceWrapper = (...args: any[]) => {
-            mp.events.remove(mappedEventName, onceWrapper);
+            mp.events.remove(eventName, onceWrapper);
             listener(...args);
         };
-        mp.events.add(mappedEventName, onceWrapper);
-        return new RageMPServerScriptEvent(mappedEventName, onceWrapper);
+        mp.events.add(eventName, onceWrapper);
+        return new RageMPServerScriptEvent(eventName, onceWrapper);
     }
 
     offPlayer(eventName: string, listener: (...args: any[]) => void): void {
