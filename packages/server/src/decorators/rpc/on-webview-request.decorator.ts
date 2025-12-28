@@ -1,11 +1,10 @@
-import { OnWebViewRequest as $OnWebViewRequest } from '@altv-mango/core';
-import type { RPC as SharedRPC } from '@altv/shared';
+import { OnWebViewRequest as $OnWebViewRequest } from '@ragemp-mango/core';
 
-export function OnWebViewRequest<E extends keyof SharedRPC.CustomWebViewToServerRPC>(id: string | number, rpcName?: E): MethodDecorator;
+export function OnWebViewRequest<E extends keyof MangoRPC.CustomWebViewToServerRPC>(id: string | number, rpcName?: E): MethodDecorator;
 export function OnWebViewRequest<E extends string>(
     id: string | number,
-    rpcName?: Exclude<E, keyof SharedRPC.CustomWebViewToServerRPC>,
+    rpcName?: Exclude<E, keyof MangoRPC.CustomWebViewToServerRPC>,
 ): MethodDecorator;
-export function OnWebViewRequest<E extends string>(id: string | number, rpcName?: Exclude<E, keyof SharedRPC.CustomWebViewToServerRPC>) {
+export function OnWebViewRequest<E extends string>(id: string | number, rpcName?: Exclude<E, keyof MangoRPC.CustomWebViewToServerRPC>) {
     return $OnWebViewRequest(id, rpcName);
 }

@@ -1,6 +1,6 @@
 ## Mango Framework
 
-A simple, lightweight, and powerful TypeScript framework for building alt:V servers.
+A simple, lightweight, and powerful TypeScript framework for building RageMP servers.
 
 ## Features
 
@@ -24,7 +24,7 @@ Through Guards, Interceptors, and Error Filters, we offer a fortified pipeline, 
 
 ## Documentation
 
-[Documentation](https://altv-mango.vercel.app)
+[Documentation](https://ragemp-mango.vercel.app)
 
 ## License
 

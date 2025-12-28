@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { RPC_RESULT_HANDLER_NOT_FOUND, type MangoPlugin, RPC_RESULT_UNKNOWN, EventDestination } from '@altv-mango/core/app';
+import { RPC_RESULT_HANDLER_NOT_FOUND, type MangoPlugin, RPC_RESULT_UNKNOWN, EventDestination } from '@ragemp-mango/core/app';
 import {
     EVENT_SERVICE,
     MangoError,
@@ -8,7 +8,7 @@ import {
     type RPCResult,
     LOGGER_SERVICE,
     type LoggerService,
-} from '@altv-mango/core';
+} from '@ragemp-mango/core';
 import type { EventService, RPCService } from '../interfaces';
 
 @injectable()

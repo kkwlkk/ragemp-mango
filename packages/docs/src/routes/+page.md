@@ -1,15 +1,15 @@
 ---
-title: Mango Framework - TypeScript Framework for alt:V servers
-description: A simple, lightweight, and powerful TypeScript framework for building alt:V servers.
+title: Mango Framework - TypeScript Framework for RageMP servers
+description: A simple, lightweight, and powerful TypeScript framework for building RageMP servers.
 heroImage: /mango.png
-tagline: A simple, lightweight, and powerful TypeScript framework for building alt:V servers.
+tagline: A simple, lightweight, and powerful TypeScript framework for building RageMP servers.
 actions:
     - label: Read the docs
       to: /guide/introduction/getting-started
       type: primary
     # - label: View on GitHub
     #   type: flat
-    #   to: https://github.com/altv-mango/altv-mango
+    #   to: https://github.com/ragemp-mango/ragemp-mango
     #   external: true
 features:
     - title: TypeScript Power

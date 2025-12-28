@@ -12,8 +12,8 @@ import {
     REFLECTOR_SERVICE,
     type Guard,
     type ExecutionContext,
-} from '@altv-mango/server';
-import { ErrorMessage } from '@altv-mango/core';
+} from '@ragemp-mango/server';
+import { ErrorMessage } from '@ragemp-mango/core';
 
 @Injectable()
 export class ThrottlerGuard implements Guard, OnModuleInit {

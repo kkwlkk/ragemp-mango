@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(find:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm install:*)"
+    ]
+  }
+}

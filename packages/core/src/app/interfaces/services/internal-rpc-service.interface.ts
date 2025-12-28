@@ -1,135 +1,132 @@
 import type { RPCResult, RPCCallOptions, ScriptRPCHandler } from '../../../interfaces';
-import type { RPC as SharedRPC } from '@altv/shared';
-import type { RPC as ServerRPC, Player } from '@altv/server';
-import type { RPC as ClientRPC } from '@altv/client';
 
 export interface InternalRPCService {
     $serverHandlers: Map<string, ScriptRPCHandler>;
     $webViewHandlers: Map<string, ScriptRPCHandler>;
     $clientHandlers: Map<string, ScriptRPCHandler>;
     // Client
-    call<E extends keyof ClientRPC.CustomClientRPC>(
+    call<E extends keyof MangoRPC.CustomClientRPC>(
         rpcName: E,
-        body?: Parameters<ClientRPC.CustomClientRPC[E]>[0],
+        body?: Parameters<MangoRPC.CustomClientRPC[E]>[0],
         options?: RPCCallOptions,
-    ): Promise<RPCResult<ReturnType<ClientRPC.CustomClientRPC[E]>>>;
+    ): Promise<RPCResult<ReturnType<MangoRPC.CustomClientRPC[E]>>>;
     call<E extends string>(
-        rpcName: Exclude<E, keyof ClientRPC.CustomClientRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomClientRPC>,
         body?: unknown,
         options?: RPCCallOptions,
     ): Promise<RPCResult<unknown>>;
-    onRequest<E extends keyof ClientRPC.CustomClientRPC>(
+    onRequest<E extends keyof MangoRPC.CustomClientRPC>(
         rpcName: E,
-        handler: (body: Parameters<ClientRPC.CustomClientRPC[E]>[0]) => ReturnType<ClientRPC.CustomClientRPC[E]>,
+        handler: (body: Parameters<MangoRPC.CustomClientRPC[E]>[0]) => ReturnType<MangoRPC.CustomClientRPC[E]>,
     ): ScriptRPCHandler;
     onRequest<E extends string>(
-        rpcName: Exclude<E, keyof ClientRPC.CustomClientRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomClientRPC>,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler;
-    callServer<E extends keyof SharedRPC.CustomClientToServerRPC>(
+    callServer<E extends keyof MangoRPC.CustomClientToServerRPC>(
         rpcName: E,
-        body?: Parameters<SharedRPC.CustomClientToServerRPC[E]>[0],
+        body?: Parameters<MangoRPC.CustomClientToServerRPC[E]>[0],
         options?: RPCCallOptions,
-    ): Promise<RPCResult<SharedRPC.CustomServerToClientRPC[E]>>;
+    ): Promise<RPCResult<MangoRPC.CustomServerToClientRPC[E]>>;
     callServer<E extends string>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomClientToServerRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomClientToServerRPC>,
         body?: unknown,
         options?: RPCCallOptions,
     ): Promise<RPCResult>;
-    onServerRequest<E extends keyof SharedRPC.CustomServerToClientRPC>(
+    onServerRequest<E extends keyof MangoRPC.CustomServerToClientRPC>(
         rpcName: E,
-        handler: (body: Parameters<SharedRPC.CustomServerToClientRPC[E]>[0]) => ReturnType<SharedRPC.CustomServerToClientRPC[E]>,
+        handler: (body: Parameters<MangoRPC.CustomServerToClientRPC[E]>[0]) => ReturnType<MangoRPC.CustomServerToClientRPC[E]>,
     ): ScriptRPCHandler;
     onServerRequest<E extends string>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomServerToClientRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomServerToClientRPC>,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler;
-    callWebView<E extends keyof SharedRPC.CustomClientToWebviewRPC>(
+    callWebView<E extends keyof MangoRPC.CustomClientToWebviewRPC>(
         id: string | number,
         rpcName: E,
-        body?: Parameters<SharedRPC.CustomClientToWebviewRPC[E]>[0],
+        body?: Parameters<MangoRPC.CustomClientToWebviewRPC[E]>[0],
         options?: RPCCallOptions,
-    ): Promise<RPCResult<SharedRPC.CustomClientToWebviewRPC[E]>>;
+    ): Promise<RPCResult<MangoRPC.CustomClientToWebviewRPC[E]>>;
     callWebView<E extends string>(
         id: string | number,
-        rpcName: Exclude<E, keyof SharedRPC.CustomClientToWebviewRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomClientToWebviewRPC>,
         body?: unknown,
         options?: RPCCallOptions,
     ): Promise<RPCResult>;
-    onWebViewRequest<E extends keyof SharedRPC.CustomWebViewToClientRPC>(
+    onWebViewRequest<E extends keyof MangoRPC.CustomWebViewToClientRPC>(
         id: string | number,
         rpcName: E,
-        handler: (body: Parameters<SharedRPC.CustomWebViewToClientRPC[E]>[0]) => ReturnType<SharedRPC.CustomWebViewToClientRPC[E]>,
+        handler: (body: Parameters<MangoRPC.CustomWebViewToClientRPC[E]>[0]) => ReturnType<MangoRPC.CustomWebViewToClientRPC[E]>,
     ): ScriptRPCHandler;
     onWebViewRequest<E extends string>(
         id: string | number,
-        rpcName: Exclude<E, keyof SharedRPC.CustomWebViewToClientRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomWebViewToClientRPC>,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler;
     // Server
-    call<E extends keyof ServerRPC.CustomServerRPC>(
+    call<E extends keyof MangoRPC.CustomServerRPC>(
         rpcName: E,
-        body?: Parameters<ServerRPC.CustomServerRPC[E]>[0],
+        body?: Parameters<MangoRPC.CustomServerRPC[E]>[0],
         options?: RPCCallOptions,
-    ): Promise<RPCResult<ReturnType<ServerRPC.CustomServerRPC[E]>>>;
+    ): Promise<RPCResult<ReturnType<MangoRPC.CustomServerRPC[E]>>>;
     call<E extends string>(
-        rpcName: Exclude<E, keyof ServerRPC.CustomServerRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomServerRPC>,
         body?: unknown,
         options?: RPCCallOptions,
     ): Promise<RPCResult<unknown>>;
-    onRequest<E extends keyof ServerRPC.CustomServerRPC>(
+    onRequest<E extends keyof MangoRPC.CustomServerRPC>(
         rpcName: E,
-        handler: (body: Parameters<ServerRPC.CustomServerRPC[E]>[0]) => ReturnType<ServerRPC.CustomServerRPC[E]>,
+        handler: (body: Parameters<MangoRPC.CustomServerRPC[E]>[0]) => ReturnType<MangoRPC.CustomServerRPC[E]>,
     ): ScriptRPCHandler;
     onRequest<E extends string>(
-        rpcName: Exclude<E, keyof ServerRPC.CustomServerRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomServerRPC>,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler;
-    callPlayer<E extends keyof SharedRPC.CustomServerToClientRPC, U extends Player>(
+    callPlayer<E extends keyof MangoRPC.CustomServerToClientRPC, U extends PlayerMp>(
         player: U,
         rpcName: E,
-        body?: Parameters<SharedRPC.CustomServerToClientRPC[E]>[0],
+        body?: Parameters<MangoRPC.CustomServerToClientRPC[E]>[0],
         options?: RPCCallOptions,
-    ): Promise<RPCResult<ReturnType<SharedRPC.CustomServerToClientRPC[E]>>>;
-    callPlayer<E extends string, U extends Player>(
+    ): Promise<RPCResult<ReturnType<MangoRPC.CustomServerToClientRPC[E]>>>;
+    callPlayer<E extends string, U extends PlayerMp>(
         player: U,
-        rpcName: Exclude<E, keyof SharedRPC.CustomServerToClientRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomServerToClientRPC>,
         body?: unknown,
         options?: RPCCallOptions,
     ): Promise<RPCResult>;
-    onPlayerRequest<E extends keyof SharedRPC.CustomClientToServerRPC, U extends Player>(
+    onPlayerRequest<E extends keyof MangoRPC.CustomClientToServerRPC, U extends PlayerMp>(
         rpcName: E,
-        handler: (sender: U, body: Parameters<SharedRPC.CustomClientToServerRPC[E]>[0]) => ReturnType<SharedRPC.CustomClientToServerRPC[E]>,
+        handler: (sender: U, body: Parameters<MangoRPC.CustomClientToServerRPC[E]>[0]) => ReturnType<MangoRPC.CustomClientToServerRPC[E]>,
     ): ScriptRPCHandler;
-    onPlayerRequest<E extends string, U extends Player>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomClientToServerRPC>,
+    onPlayerRequest<E extends string, U extends PlayerMp>(
+        rpcName: Exclude<E, keyof MangoRPC.CustomClientToServerRPC>,
         handler: (sender: U, body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler;
-    callWebView<E extends keyof SharedRPC.CustomServerToWebViewRPC, U extends Player>(
+    callWebView<E extends keyof MangoRPC.CustomServerToWebViewRPC, U extends PlayerMp>(
         player: U,
         id: string | number,
         rpcName: E,
-        body?: Parameters<SharedRPC.CustomServerToWebViewRPC[E]>[0],
+        body?: Parameters<MangoRPC.CustomServerToWebViewRPC[E]>[0],
         options?: RPCCallOptions,
-    ): Promise<RPCResult<ReturnType<SharedRPC.CustomServerToWebViewRPC[E]>>>;
-    callWebView<E extends string, U extends Player>(
+    ): Promise<RPCResult<ReturnType<MangoRPC.CustomServerToWebViewRPC[E]>>>;
+    callWebView<E extends string, U extends PlayerMp>(
         player: U,
         id: string | number,
-        rpcName: Exclude<E, keyof SharedRPC.CustomServerToWebViewRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomServerToWebViewRPC>,
         body?: unknown,
         options?: RPCCallOptions,
     ): Promise<RPCResult>;
-    onWebViewRequest<E extends string, U extends Player>(
+    onWebViewRequest<E extends string, U extends PlayerMp>(
         id: string | number,
-        rpcName: Exclude<E, keyof SharedRPC.CustomWebViewToServerRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomWebViewToServerRPC>,
         handler: (player: U, body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler;
-    onWebViewRequest<E extends keyof SharedRPC.CustomWebViewToServerRPC, U extends Player>(
+    onWebViewRequest<E extends keyof MangoRPC.CustomWebViewToServerRPC, U extends PlayerMp>(
         id: string | number,
         rpcName: E,
         handler: (
             player: U,
-            body: Parameters<SharedRPC.CustomWebViewToServerRPC[E]>[0],
-        ) => ReturnType<SharedRPC.CustomWebViewToServerRPC[E]>,
+            body: Parameters<MangoRPC.CustomWebViewToServerRPC[E]>[0],
+        ) => ReturnType<MangoRPC.CustomWebViewToServerRPC[E]>,
     ): ScriptRPCHandler;
 }

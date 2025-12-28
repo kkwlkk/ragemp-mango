@@ -9,6 +9,11 @@ export default defineConfig({
     format: 'esm',
     bundle: true,
     minify: false,
-    external: Object.keys(packageJson.dependencies),
-    noExternal: [...Object.keys(packageJson.devDependencies), ...Object.keys(packageJson.peerDependencies)],
+    dts: true,
+    external: [
+        ...Object.keys(packageJson.dependencies),
+        ...Object.keys(packageJson.peerDependencies),
+        /^@ragemp-mango\/.*/,
+    ],
+    noExternal: [...Object.keys(packageJson.devDependencies)],
 });

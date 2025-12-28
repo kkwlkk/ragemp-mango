@@ -9,7 +9,7 @@ Rate limiting is only integrated on the server side.
 First, import the `ThrottlerModule` and use the `forRoot` or `forRootAsync` method to add the throttler module to the root module.
 
 ```typescript
-import { ThrottlerModule } from '@altv-mango/server';
+import { ThrottlerModule } from '@ragemp-mango/server';
 
 @Module({
     imports: [

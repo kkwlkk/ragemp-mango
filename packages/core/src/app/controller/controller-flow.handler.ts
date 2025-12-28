@@ -4,7 +4,6 @@ import type { ExecutionContextBase } from '../pipeline';
 import type { EventMetadata, RPCMetadata } from '../interfaces';
 import type { Newable } from '../../types';
 import type { Pipe } from '../../interfaces';
-import type { Player } from '@altv/server';
 import { PipelineHandler } from './pipeline.handler';
 import { isObject } from '../../utils';
 import { AppEnviroment } from '../enums';
@@ -20,7 +19,7 @@ export class ControllerFlowHandler {
         executionContext: ExecutionContextBase,
         metadata: RPCMetadata | EventMetadata,
         pipes: (Newable<Pipe> | Pipe)[],
-        player?: Player,
+        player?: PlayerMp,
     ) {
         return Promise.all(
             metadata.params.map(async (param) => {
@@ -68,7 +67,7 @@ export class ControllerFlowHandler {
                 } else if (param.type === 'player' && this.appEnv === AppEnviroment.Server) {
                     // Player (Server)
                     return this.pipelineHandler.goTroughPipes(
-                        param.data ? player![<keyof Player>param.data] : player,
+                        param.data ? player![<keyof PlayerMp>param.data] : player,
                         [...pipes, ...(param?.pipes ?? [])],
                         argumentMetadata,
                         controller.owner.container,

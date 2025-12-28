@@ -14,16 +14,16 @@ title: Controllers
 Controllers are the core of your application, as they are responsible for handling incoming events/RPCs and returning responses to the client when RPC is used. Controllers are classes that are decorated with the `@Controller()` decorator. A single controller can have multiple event/RPC handlers, and different event/RPC handlers can perform different actions.
 
 ```typescript
-import { Controller } from '@altv-mango/server'; // [svp! ++]
+import { Controller } from '@ragemp-mango/server'; // [svp! ++]
 //  or
-import { Controller } from '@altv-mango/client'; // [svp! ++]
+import { Controller } from '@ragemp-mango/client'; // [svp! ++]
 
 @Controller()
 export class DeliciousMangoController {
     @Inject() private readonly db: MyDatabaseService;
 
     @OnPlayerConnect()
-    public onPlayerConnect(@Player() player: alt.Player) {
+    public onPlayerConnect(@Player() player: PlayerMp) {
         console.log(`${player.name} wants to eat a mango!`);
     }
 
@@ -38,11 +38,11 @@ export class DeliciousMangoController {
 
 ### Passing Arguments
 
-By default, in alt:V event emitting you can pass multiple arguments because it uses the spread operator. However, in the Mango framework, you can only pass one argument. If you want to pass multiple arguments, you should use an object or an array.
+By default, in RageMP event emitting you can pass multiple arguments because it uses the spread operator. However, in the Mango framework, you can only pass one argument. If you want to pass multiple arguments, you should use an object or an array.
 
 ```typescript
-// alt:V
-alt.Events.emit('myEvent', arg1, arg2, arg3);
+// RageMP
+mp.events.call('myEvent', arg1, arg2, arg3);
 // Mango Framework
 eventService.emit('myEvent', { arg1, arg2, arg3 });
 ```

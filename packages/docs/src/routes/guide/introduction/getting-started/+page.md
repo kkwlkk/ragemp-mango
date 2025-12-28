@@ -9,7 +9,7 @@ It is not for beginners. It is recommended that you have some experience with Ty
 ## Requirements
 
 -   [Node.js](https://nodejs.org/en/)
--   [alt\:V JavaScript v2 module](https://github.com/altmp/altv-js-module-v2)
+-   [RageMP Server](https://rage.mp/)
 
 :::important[Decorators]
 Your project must support **emitDecoratorMetadata** and **experimentalDecorators** options. Usually this is done by adding the following to your **tsconfig.json** or **jsconfig.json** file. It depends what compiler you are using.
@@ -31,11 +31,11 @@ Mango Framework has two packages, one for the server-side code and one for the c
 
 ### Server
 
-@install-pkg(@altv-mango/server)
+@install-pkg(@ragemp-mango/server)
 
 ### Client
 
-@install-pkg(@altv-mango/client)
+@install-pkg(@ragemp-mango/client)
 
 ## Preparing the Application
 
@@ -43,12 +43,12 @@ Starting an application involves several steps. One of them is creating the appl
 
 ### App Builder
 
-To initialize the application module tree (the root module and its children), the application builder has to be created first. You can do this using the createAppBuilder function from the `@altv-mango/server` or `@altv-mango/client` package.
+To initialize the application module tree (the root module and its children), the application builder has to be created first. You can do this using the createAppBuilder function from the `@ragemp-mango/server` or `@ragemp-mango/client` package.
 
 ```typescript
-import { createAppBuilder } from '@altv-mango/server'; // [svp! ++]
+import { createAppBuilder } from '@ragemp-mango/server'; // [svp! ++]
 // OR
-import { createAppBuilder } from '@altv-mango/client'; // [svp! ++]
+import { createAppBuilder } from '@ragemp-mango/client'; // [svp! ++]
 
 const appBuilder = createAppBuilder();
 ```

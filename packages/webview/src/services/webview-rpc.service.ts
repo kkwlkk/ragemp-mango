@@ -1,14 +1,12 @@
-import { type RPCCallOptions, type RPCResult, type ScriptRPCHandler } from '@altv-mango/core/interfaces';
-import { RPC_RESULT_HANDLER_NOT_FOUND, RPC_RESULT_TIMEOUT } from '@altv-mango/core/app/constants';
+import { type RPCCallOptions, type RPCResult, type ScriptRPCHandler } from '@ragemp-mango/core/interfaces';
+import { RPC_RESULT_HANDLER_NOT_FOUND, RPC_RESULT_TIMEOUT } from '@ragemp-mango/core/app/constants';
 import type { EventService, RPCService } from '../interfaces';
 import type { WebViewEventService } from './webview-event.service';
 import type { WebViewLoggerService } from './webview-logger.service';
-import type { RPC as SharedRPC } from '@altv/shared';
-import type { RPC as WebViewRPC } from '@altv/webview';
-import { generateRandomId, isNil } from '@altv-mango/core/utils';
-import { ErrorMessage, RPCResultStatus } from '@altv-mango/core/enums';
-import { EventDestination } from '@altv-mango/core/app/enums';
-import type { RPCPayload } from '@altv-mango/core/app/interfaces';
+import { generateRandomId, isNil } from '@ragemp-mango/core/utils';
+import { ErrorMessage, RPCResultStatus } from '@ragemp-mango/core/enums';
+import { EventDestination } from '@ragemp-mango/core/app/enums';
+import type { RPCPayload } from '@ragemp-mango/core/app/interfaces';
 
 export class WebViewRPCService implements RPCService {
     private readonly $TIMEOUT = 2000;
@@ -19,7 +17,7 @@ export class WebViewRPCService implements RPCService {
     public constructor(private readonly $eventService: WebViewEventService, private readonly $loggerService: WebViewLoggerService) {}
 
     public async call<E extends string>(
-        rpcName: Exclude<E, keyof WebViewRPC.CustomWebViewRPC>,
+        rpcName: E,
         body?: unknown,
         options: RPCCallOptions = { timeout: this.$TIMEOUT },
     ): Promise<RPCResult> {
@@ -41,7 +39,7 @@ export class WebViewRPCService implements RPCService {
     }
 
     public onRequest<E extends string>(
-        rpcName: Exclude<E, keyof WebViewRPC.CustomWebViewRPC>,
+        rpcName: E,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler {
         if (this.$localHandlers.has(rpcName)) {
@@ -63,7 +61,7 @@ export class WebViewRPCService implements RPCService {
     }
 
     public callServer<E extends string>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomWebViewToServerRPC>,
+        rpcName: E,
         body?: unknown,
         options: RPCCallOptions = { timeout: this.$TIMEOUT },
     ): Promise<RPCResult> {
@@ -71,7 +69,7 @@ export class WebViewRPCService implements RPCService {
     }
 
     public onServerRequest<E extends string>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomServerToWebViewRPC>,
+        rpcName: E,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler {
         if (this.$serverHandlers.has(rpcName)) {
@@ -93,7 +91,7 @@ export class WebViewRPCService implements RPCService {
     }
 
     public callPlayer<E extends string>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomWebViewToClientRPC>,
+        rpcName: E,
         body?: unknown,
         options: RPCCallOptions = { timeout: this.$TIMEOUT },
     ): Promise<RPCResult> {
@@ -101,7 +99,7 @@ export class WebViewRPCService implements RPCService {
     }
 
     public onPlayerRequest<E extends string>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomClientToWebviewRPC>,
+        rpcName: E,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ): ScriptRPCHandler {
         if (this.$clientHandlers.has(rpcName)) {

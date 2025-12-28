@@ -1,3 +1,3 @@
-import type { MangoRequest as $MangoRequest } from '@altv-mango/core/app';
+import type { MangoRequest as $MangoRequest } from '@ragemp-mango/core/app';
 
 export interface MangoRequest<TData = unknown> extends $MangoRequest<TData> {}

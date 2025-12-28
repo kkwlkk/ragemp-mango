@@ -1,4 +1,4 @@
-import type { MultiplayerService } from '@altv-mango/core/app';
+import type { MultiplayerService } from '@ragemp-mango/core/app';
 import type { ServerEventEmmiter } from '../event';
 
 export interface ServerMultiplayerService extends MultiplayerService {

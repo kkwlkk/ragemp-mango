@@ -1,17 +1,16 @@
-import { Injectable, type OnAppShutdown } from '@altv-mango/core';
+import { Injectable, type OnAppShutdown } from '@ragemp-mango/core';
 import type { ThrottlerStorageOptions } from '../interfaces';
-import type { Player } from '@altv/server';
 
 @Injectable()
 export class ThrottlerStorageService implements OnAppShutdown {
-    public readonly storage: WeakMap<Player, Map<string, ThrottlerStorageOptions>> = new WeakMap();
+    public readonly storage: WeakMap<PlayerMp, Map<string, ThrottlerStorageOptions>> = new WeakMap();
     private timeoutIds: NodeJS.Timeout[] = [];
 
-    private getExpirationTime(player: Player, key: string) {
+    private getExpirationTime(player: PlayerMp, key: string) {
         return Math.floor((this.storage.get(player)!.get(key)!.expiresAt - Date.now()) / 1000);
     }
 
-    private setExpirationTime(player: Player, key: string, ttlMilliseconds: number) {
+    private setExpirationTime(player: PlayerMp, key: string, ttlMilliseconds: number) {
         const timeoutId = setTimeout(() => {
             this.storage.get(player)!.get(key)!.totalHits--;
             clearTimeout(timeoutId);
@@ -20,7 +19,7 @@ export class ThrottlerStorageService implements OnAppShutdown {
         this.timeoutIds.push(timeoutId);
     }
 
-    public async increment(player: Player, key: string, ttl: number) {
+    public async increment(player: PlayerMp, key: string, ttl: number) {
         const ttlMilliseconds = ttl;
 
         if (!this.storage.get(player)) {

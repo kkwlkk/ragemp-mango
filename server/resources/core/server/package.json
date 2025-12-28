@@ -1,5 +1,5 @@
 {
-    "name": "@altv-resource/server",
+    "name": "@ragemp-resource/server",
     "type": "module",
     "scripts": {
         "build": "tsup",
@@ -7,13 +7,11 @@
     },
     "dependencies": {
         "@abraham/reflection": "^0.12.0",
-        "@altv/server": "^0.0.40",
-        "@altv/shared": "^0.0.16",
         "axios": "^1.6.8",
         "dotenv": "^16.4.5"
     },
     "devDependencies": {
-        "@altv-mango/server": "workspace:^",
+        "@ragemp-mango/server": "workspace:^",
         "@swc/core": "^1.4.17",
         "@types/node": "^20.12.7",
         "tsup": "^8.0.2",

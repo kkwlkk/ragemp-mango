@@ -1,4 +1,4 @@
-import type { ErrorFilter as $ErrorFilter } from '@altv-mango/core/app';
+import type { ErrorFilter as $ErrorFilter } from '@ragemp-mango/core/app';
 import type { MangoRequest } from './mango-request.interface';
 import type { MangoResponse } from './mango-response.interface';
 

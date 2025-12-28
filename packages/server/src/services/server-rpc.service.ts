@@ -6,7 +6,7 @@ import {
     RPC_RESULT_TIMEOUT,
     RPC_RESULT_PLAYER_DISCONNECTED,
     RPC_RESULT_PLAYER_NOT_FOUND,
-} from '@altv-mango/core/app';
+} from '@ragemp-mango/core/app';
 import {
     EVENT_SERVICE,
     ErrorMessage,
@@ -14,21 +14,19 @@ import {
     type RPCResult,
     type ScriptRPCHandler,
     generateRandomId,
-} from '@altv-mango/core';
+} from '@ragemp-mango/core';
 import type { MultiplayerPlayer, RPCService } from '../interfaces';
 import type { ServerEventService } from './server-event.service';
-import type { RPC as ServerRPC } from '@altv/server';
-import type { RPC as SharedRPC } from '@altv/shared';
 
 @injectable()
-export class ServerRPCService extends BaseRPCService<ServerRPC.CustomServerRPC> implements RPCService {
+export class ServerRPCService extends BaseRPCService<MangoRPC.CustomServerRPC> implements RPCService {
     @inject(EVENT_SERVICE) private readonly $eventService: ServerEventService;
     public readonly $clientHandlers = new Map<string, ScriptRPCHandler>();
     public readonly $webViewHandlers = new Map<string, ScriptRPCHandler>();
 
     public async callPlayer<E extends string, U extends MultiplayerPlayer>(
         player: U,
-        rpcName: Exclude<E, keyof SharedRPC.CustomServerToClientRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomServerToClientRPC>,
         body?: unknown,
         options: RPCCallOptions = { timeout: this.$TIMEOUT },
     ) {
@@ -36,7 +34,7 @@ export class ServerRPCService extends BaseRPCService<ServerRPC.CustomServerRPC> 
     }
 
     public onPlayerRequest<E extends string, U extends MultiplayerPlayer>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomClientToServerRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomClientToServerRPC>,
         handler: (sender: U, body: unknown) => unknown | Promise<unknown>,
     ) {
         if (this.$clientHandlers.has(rpcName)) {
@@ -63,20 +61,20 @@ export class ServerRPCService extends BaseRPCService<ServerRPC.CustomServerRPC> 
     public async callWebView<E extends string, U extends MultiplayerPlayer>(
         player: U,
         id: string | number,
-        rpcName: Exclude<E, keyof SharedRPC.CustomServerToWebViewRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomServerToWebViewRPC>,
         body?: unknown,
         options: RPCCallOptions = { timeout: this.$TIMEOUT },
     ) {
         return this.$handleCall(player, rpcName, EventDestination.WebView, options, body, id);
     }
 
-    public onWebViewRequest<E extends keyof SharedRPC.CustomWebViewToServerRPC, U extends MultiplayerPlayer>(
+    public onWebViewRequest<E extends keyof MangoRPC.CustomWebViewToServerRPC, U extends MultiplayerPlayer>(
         id: string | number,
-        rpcName: Exclude<E, keyof SharedRPC.CustomWebViewToServerRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomWebViewToServerRPC>,
         handler: (
             player: U,
-            body: Parameters<SharedRPC.CustomWebViewToServerRPC[E]>[0],
-        ) => ReturnType<SharedRPC.CustomWebViewToServerRPC[E]>,
+            body: Parameters<MangoRPC.CustomWebViewToServerRPC[E]>[0],
+        ) => ReturnType<MangoRPC.CustomWebViewToServerRPC[E]>,
     ) {
         const key = `${id}::${rpcName}`;
         if (this.$webViewHandlers.has(key)) {

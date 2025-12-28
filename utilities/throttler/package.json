@@ -1,11 +1,11 @@
 {
-    "name": "@altv-mango/throttler",
+    "name": "@ragemp-mango/throttler",
     "version": "1.0.0",
-    "homepage": "https://altv-mango.vercel.app",
+    "homepage": "https://github.com/ragemp-mango/ragemp-mango",
     "repository": {
         "type": "git",
-        "url": "https://github.com/altv-mango/altv-mango",
-        "directory": "packages/server"
+        "url": "https://github.com/ragemp-mango/ragemp-mango",
+        "directory": "utilities/throttler"
     },
     "license": "MIT",
     "author": "5exyGuy (Aurėjus Remeika)",
@@ -30,9 +30,8 @@
         "typescript": "^5.4.5"
     },
     "peerDependencies": {
-        "@altv-mango/core": "workspace:^",
-        "@altv-mango/server": "workspace:^",
-        "@altv/server": "^0.0.40"
+        "@ragemp-mango/core": "workspace:^",
+        "@ragemp-mango/server": "workspace:^"
     },
     "publishConfig": {
         "access": "public",

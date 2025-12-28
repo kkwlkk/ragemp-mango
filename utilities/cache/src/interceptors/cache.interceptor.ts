@@ -10,7 +10,7 @@ import {
     type Interceptor,
     type LoggerService,
     type ReflectorService,
-} from '@altv-mango/server';
+} from '@ragemp-mango/server';
 import type { CacheOptions } from '../interfaces';
 import type { Cache } from 'cache-manager';
 

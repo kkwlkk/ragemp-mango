@@ -1,8 +1,7 @@
-import { Once as $Once } from '@altv-mango/core';
-import type { Events as ServerEvents } from '@altv/server';
+import { Once as $Once } from '@ragemp-mango/core';
 
-export function Once<E extends keyof ServerEvents.CustomServerEvent>(eventName?: E): MethodDecorator;
-export function Once<E extends string>(eventName?: Exclude<E, keyof ServerEvents.CustomServerEvent>): MethodDecorator;
-export function Once<E extends string>(eventName?: Exclude<E, keyof ServerEvents.CustomServerEvent>) {
+export function Once<E extends keyof MangoEvents.CustomServerEvent>(eventName?: E): MethodDecorator;
+export function Once<E extends string>(eventName?: Exclude<E, keyof MangoEvents.CustomServerEvent>): MethodDecorator;
+export function Once<E extends string>(eventName?: Exclude<E, keyof MangoEvents.CustomServerEvent>) {
     return $Once(eventName);
 }

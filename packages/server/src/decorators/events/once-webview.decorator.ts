@@ -1,11 +1,10 @@
-import { OnceWebView as $OnceWebView } from '@altv-mango/core';
-import type { Events as SharedEvents } from '@altv/shared';
+import { OnceWebView as $OnceWebView } from '@ragemp-mango/core';
 
-export function OnceWebView<E extends keyof SharedEvents.CustomWebViewToServerEvent>(id: string | number, eventName?: E): MethodDecorator;
+export function OnceWebView<E extends keyof MangoEvents.CustomWebViewToServerEvent>(id: string | number, eventName?: E): MethodDecorator;
 export function OnceWebView<E extends string>(
     id: string | number,
-    eventName?: Exclude<E, keyof SharedEvents.CustomWebViewToServerEvent>,
+    eventName?: Exclude<E, keyof MangoEvents.CustomWebViewToServerEvent>,
 ): MethodDecorator;
-export function OnceWebView<E extends string>(id: string | number, eventName?: Exclude<E, keyof SharedEvents.CustomWebViewToServerEvent>) {
+export function OnceWebView<E extends string>(id: string | number, eventName?: Exclude<E, keyof MangoEvents.CustomWebViewToServerEvent>) {
     return $OnceWebView(id, eventName);
 }

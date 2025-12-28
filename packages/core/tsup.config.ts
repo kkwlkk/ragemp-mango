@@ -33,7 +33,8 @@ export default defineConfig({
     outDir: 'dist',
     bundle: true,
     minify: false,
-    external: [...Object.keys(packageJson.dependencies), 'alt-shared'],
+    external: [...Object.keys(packageJson.dependencies)],
+    dts: true,
     noExternal: Object.keys(packageJson.devDependencies),
     // esbuildPlugins: [polyfillNode()],
 });

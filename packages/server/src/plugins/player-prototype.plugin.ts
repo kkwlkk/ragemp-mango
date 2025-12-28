@@ -1,7 +1,7 @@
 import { Container, inject, injectable } from 'inversify';
 import type { RPCService, ServerMultiplayerService } from '../interfaces';
-import { LOGGER_SERVICE, RPC_SERVICE, type LoggerService, type RPCCallOptions } from '@altv-mango/core';
-import { GLOBAL_APP_CONTAINER, MULTIPLAYER_SERVICE, type MangoPlugin } from '@altv-mango/core/app';
+import { LOGGER_SERVICE, RPC_SERVICE, type LoggerService, type RPCCallOptions } from '@ragemp-mango/core';
+import { GLOBAL_APP_CONTAINER, MULTIPLAYER_SERVICE, type MangoPlugin } from '@ragemp-mango/core/app';
 
 @injectable()
 export class PlayerPrototypePlugin implements MangoPlugin {

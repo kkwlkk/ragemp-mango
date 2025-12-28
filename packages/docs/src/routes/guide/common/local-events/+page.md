@@ -49,7 +49,7 @@ export class MangoController {
 Every internal event has its own decorator. For example, the `@OnPlayerConnect()` decorator is used to listen to the `playerConnect` event.
 
 ```ts
-import { Controller, OnPlayerConnect, Player } from '@altv-mango/server';
+import { Controller, OnPlayerConnect, Player } from '@ragemp-mango/server';
 
 @Controller()
 export class MangoController {

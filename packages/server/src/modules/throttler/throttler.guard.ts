@@ -12,7 +12,7 @@ import {
     Injectable,
     Inject,
     REFLECTOR_SERVICE,
-} from '@altv-mango/core';
+} from '@ragemp-mango/core';
 
 @Injectable()
 export class ThrottlerGuard implements Guard, OnModuleInit {

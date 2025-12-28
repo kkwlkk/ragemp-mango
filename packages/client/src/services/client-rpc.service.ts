@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { BaseRPCService, EventDestination, type RPCPayload, RPC_RESULT_TIMEOUT } from '@altv-mango/core/app';
+import { BaseRPCService, EventDestination, type RPCPayload, RPC_RESULT_TIMEOUT } from '@ragemp-mango/core/app';
 import {
     ErrorMessage,
     EVENT_SERVICE,
@@ -7,20 +7,18 @@ import {
     type RPCCallOptions,
     type RPCResult,
     type ScriptRPCHandler,
-} from '@altv-mango/core';
+} from '@ragemp-mango/core';
 import type { RPCService } from '../interfaces';
 import type { ClientEventService } from './client-event.service';
-import type { RPC as SharedRPC } from '@altv/shared';
-import type { RPC as ClientRPC } from '@altv/client';
 
 @injectable()
-export class ClientRPCService extends BaseRPCService<ClientRPC.CustomClientRPC> implements RPCService {
+export class ClientRPCService extends BaseRPCService<MangoRPC.CustomClientRPC> implements RPCService {
     @inject(EVENT_SERVICE) private readonly $eventService: ClientEventService;
     public readonly $serverHandlers = new Map<string, ScriptRPCHandler>();
     public readonly $webViewHandlers = new Map<string, ScriptRPCHandler>();
 
     public async callServer<E extends string>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomClientToServerRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomClientToServerRPC>,
         body?: unknown,
         options: RPCCallOptions = { timeout: this.$TIMEOUT },
     ) {
@@ -28,7 +26,7 @@ export class ClientRPCService extends BaseRPCService<ClientRPC.CustomClientRPC> 
     }
 
     public onServerRequest<E extends string>(
-        rpcName: Exclude<E, keyof SharedRPC.CustomServerToClientRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomServerToClientRPC>,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ) {
         if (this.$serverHandlers.has(rpcName)) {
@@ -51,7 +49,7 @@ export class ClientRPCService extends BaseRPCService<ClientRPC.CustomClientRPC> 
 
     public async callWebView<E extends string>(
         id: string | number,
-        rpcName: Exclude<E, keyof SharedRPC.CustomClientToWebviewRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomClientToWebviewRPC>,
         body?: unknown,
         options: RPCCallOptions = { timeout: this.$TIMEOUT },
     ) {
@@ -60,7 +58,7 @@ export class ClientRPCService extends BaseRPCService<ClientRPC.CustomClientRPC> 
 
     public onWebViewRequest<E extends string>(
         id: string | number,
-        rpcName: Exclude<E, keyof SharedRPC.CustomWebViewToClientRPC>,
+        rpcName: Exclude<E, keyof MangoRPC.CustomWebViewToClientRPC>,
         handler: (body: unknown) => unknown | Promise<unknown>,
     ) {
         const key = `${id}::${rpcName}`;

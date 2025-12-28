@@ -1,5 +1,5 @@
-import { CoreMetadataKey, MethodParamType, type MethodParameter } from '@altv-mango/core/app';
-import { ErrorMessage, type Newable, type Pipe } from '@altv-mango/core';
+import { CoreMetadataKey, MethodParamType, type MethodParameter } from '@ragemp-mango/core/app';
+import { ErrorMessage, type Newable, type Pipe } from '@ragemp-mango/core';
 
 export function Player(key?: string, ...pipes: Newable<Pipe>[]) {
     return <ParameterDecorator>((target: Object, method: string, index: number) => {

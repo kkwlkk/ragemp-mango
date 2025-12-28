@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
-import { MANGO_LOG_PREFIX, MULTIPLAYER_SERVICE } from '@altv-mango/core/app';
-import type { LoggerService } from '@altv-mango/core';
+import { MANGO_LOG_PREFIX, MULTIPLAYER_SERVICE } from '@ragemp-mango/core/app';
+import type { LoggerService } from '@ragemp-mango/core';
 import type { ServerMultiplayerService } from '../interfaces';
 
 @injectable()

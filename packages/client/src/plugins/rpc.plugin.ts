@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { type MangoPlugin, type RPCPayload, RPC_RESULT_HANDLER_NOT_FOUND, RPC_RESULT_UNKNOWN } from '@altv-mango/core/app';
+import { type MangoPlugin, type RPCPayload, RPC_RESULT_HANDLER_NOT_FOUND, RPC_RESULT_UNKNOWN } from '@ragemp-mango/core/app';
 import {
     EVENT_SERVICE,
     RPC_SERVICE,
@@ -9,7 +9,7 @@ import {
     LOGGER_SERVICE,
     isNil,
     type LoggerService,
-} from '@altv-mango/core';
+} from '@ragemp-mango/core';
 import { WEBVIEW_SERVICE } from '../constants';
 import type { ClientWebViewService } from '../services';
 import type { EventService, RPCService } from '../interfaces';

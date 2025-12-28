@@ -15,8 +15,7 @@ import {
     type ExecutionContext,
     type LoggerService,
     type OnModuleInit,
-} from '@altv-mango/server';
-import * as alt from '@altv/server';
+} from '@ragemp-mango/server';
 
 @Catch('sss')
 @Injectable()
@@ -43,7 +42,7 @@ export class RootController implements OnModuleInit {
     @Inject(EVENT_SERVICE) private readonly eventService: EventService;
 
     @OnPlayerDisconnect()
-    public onPlayerDisconnect(@Player() player: alt.Player) {
+    public onPlayerDisconnect(@Player() player: PlayerMp) {
         this.loggerService.debug(`Player ${player.name} disconnected`);
     }
 

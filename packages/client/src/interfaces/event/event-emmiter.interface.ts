@@ -1,4 +1,4 @@
-import type { EventEmmiter, ScriptEventHandler } from '@altv-mango/core/app';
+import type { EventEmmiter, ScriptEventHandler } from '@ragemp-mango/core/app';
 
 export interface ClientEventEmmiter extends EventEmmiter {
     emitServer(eventName: string, ...args: any[]): void;

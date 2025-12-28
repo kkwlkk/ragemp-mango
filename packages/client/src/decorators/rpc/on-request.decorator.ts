@@ -1,8 +1,7 @@
-import { OnRequest as $OnRequest } from '@altv-mango/core';
-import type { RPC as ClientRPC } from '@altv/client';
+import { OnRequest as $OnRequest } from '@ragemp-mango/core';
 
-export function OnRequest<E extends keyof ClientRPC.CustomClientRPC>(rpcName?: E): MethodDecorator;
-export function OnRequest<E extends string>(rpcName?: Exclude<E, keyof ClientRPC.CustomClientRPC>): MethodDecorator;
-export function OnRequest<E extends string>(rpcName?: Exclude<E, keyof ClientRPC.CustomClientRPC>) {
+export function OnRequest<E extends keyof MangoRPC.CustomClientRPC>(rpcName?: E): MethodDecorator;
+export function OnRequest<E extends string>(rpcName?: Exclude<E, keyof MangoRPC.CustomClientRPC>): MethodDecorator;
+export function OnRequest<E extends string>(rpcName?: Exclude<E, keyof MangoRPC.CustomClientRPC>) {
     return $OnRequest(rpcName);
 }

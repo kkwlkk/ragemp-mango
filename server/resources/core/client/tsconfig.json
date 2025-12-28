@@ -24,7 +24,7 @@
         "emitDecoratorMetadata": true,
         "strictPropertyInitialization": false,
         "verbatimModuleSyntax": true,
-        "typeRoots": ["./node_modules/@types", "./node_modules/@altv", "./node_modules/@altv-mango", "./types"],
+        "typeRoots": ["./node_modules/@types", "./node_modules/@ragemp-mango", "./types"],
         "paths": {
             "@shared/*": ["../shared/src/*"],
             "@shared": ["../shared/src"]

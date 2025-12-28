@@ -1,4 +1,4 @@
-import { Inject, Injectable, Optional, isUndefined } from '@altv-mango/core';
+import { Inject, Injectable, Optional, isUndefined } from '@ragemp-mango/core';
 import * as dotenv from 'dotenv';
 import fs from 'fs';
 import get from 'lodash/get';

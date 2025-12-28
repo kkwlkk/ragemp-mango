@@ -12,7 +12,7 @@ export default defineConfig({
     },
     external: [
         ...Object.keys(packageJson.dependencies),
-        ...Object.keys(packageJson.peerDependencies).filter((dep) => dep !== '@altv-mango/core' && dep !== '@altv-mango/core/app'),
+        ...Object.keys(packageJson.peerDependencies).filter((dep) => dep !== '@ragemp-mango/core' && dep !== '@ragemp-mango/core/app'),
     ],
     plugins: [
         esbuild({
@@ -22,7 +22,7 @@ export default defineConfig({
             // minify: true,
         }),
         nodeResolve({
-            resolveOnly: [...Object.keys(packageJson.devDependencies), '@altv-mango/core', '@altv-mango/core/app'],
+            resolveOnly: [...Object.keys(packageJson.devDependencies), '@ragemp-mango/core', '@ragemp-mango/core/app'],
         }),
         commonjs(),
     ],

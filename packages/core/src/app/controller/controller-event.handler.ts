@@ -9,7 +9,6 @@ import { EVENT_SERVICE, LOGGER_SERVICE } from '../../constants';
 import type { Controller } from './controller';
 import { AppEnviroment, ExecutionContextType } from '../enums';
 import { ExecutionContextBase, MangoResponseBase, type MangoRequestBase } from '../pipeline';
-import type { Player } from '@altv/server';
 import { ErrorMessage } from '../../enums';
 import type { CallHandler, LoggerService, Pipe } from '../../interfaces';
 import { isAsyncFunction } from '../../utils';
@@ -23,7 +22,7 @@ export class ControllerEventHandler {
     @inject(ControllerFlowHandler) private readonly controllerFlowHandler: ControllerFlowHandler;
     @inject(PipelineHandler) private readonly pipelineHandler: PipelineHandler;
     @inject(LOGGER_SERVICE) private readonly loggerService: LoggerService;
-    @inject(MANGO_REQUEST_FACTORY) private readonly createMangoRequest: (body: unknown, player?: Player) => MangoRequestBase;
+    @inject(MANGO_REQUEST_FACTORY) private readonly createMangoRequest: (body: unknown, player?: PlayerMp) => MangoRequestBase;
     @inject(EXECUTION_CONTEXT_FACTORY) private readonly createExecutionContext: (
         type: ExecutionContextType,
         classRef: Newable,
@@ -47,7 +46,7 @@ export class ControllerEventHandler {
             });
         } else if (event.type === 'onInternal' || event.type === 'onceInternal') {
             return this.eventService[`$${event.type}`](event.name, async (...args) => {
-                const { player, body } = this.multiplayerService.parseInternalArgs<Player>(...args);
+                const { player, body } = this.multiplayerService.parseInternalArgs<PlayerMp>(...args);
                 await this.handleEvent(guards, interceptors, pipes, mappedErrorFilters, controller, event, body, player);
             });
         } else if (event.type === 'onPlayer' || event.type === 'oncePlayer') {
@@ -61,7 +60,7 @@ export class ControllerEventHandler {
         } else if (event.type === 'onWebView' || event.type === 'onceWebView') {
             return this.eventService[event.type](event.webViewId!, event.name, async (...args: unknown[]) => {
                 const body = this.appEnv === AppEnviroment.Server ? args[1] : args[0];
-                const player = this.appEnv === AppEnviroment.Server ? <Player>args[0] : undefined;
+                const player = this.appEnv === AppEnviroment.Server ? <PlayerMp>args[0] : undefined;
                 await this.handleEvent(guards, interceptors, pipes, mappedErrorFilters, controller, event, body, player);
             });
         }
@@ -78,7 +77,7 @@ export class ControllerEventHandler {
         controller: Controller,
         event: EventMetadata,
         body: unknown,
-        player?: Player,
+        player?: PlayerMp,
     ) {
         const request = this.createMangoRequest(body, player);
         const executionContext = this.createExecutionContext(

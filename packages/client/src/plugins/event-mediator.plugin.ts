@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
-import type { MangoPlugin } from '@altv-mango/core/app';
-import { EVENT_SERVICE, LOGGER_SERVICE, type LoggerService } from '@altv-mango/core';
+import type { MangoPlugin } from '@ragemp-mango/core/app';
+import { EVENT_SERVICE, LOGGER_SERVICE, type LoggerService } from '@ragemp-mango/core';
 import { WEBVIEW_SERVICE } from '../constants';
 import type { EventService } from '../interfaces';
 import type { ClientWebViewService } from '../services';

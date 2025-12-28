@@ -8,7 +8,7 @@ import {
     type CallHandler,
     type LoggerService,
     type ReflectorService,
-} from '@altv-mango/core';
+} from '@ragemp-mango/core';
 import type { ExecutionContext, Interceptor } from '../../../interfaces';
 import type { CacheOptions } from '../interfaces';
 import type { Cache } from 'cache-manager';

@@ -1,9 +1,9 @@
 import { Container, inject, injectable } from 'inversify';
-import { INTERNAL_APP_CONTAINER, type MangoPlugin } from '@altv-mango/core/app';
+import { INTERNAL_APP_CONTAINER, type MangoPlugin } from '@ragemp-mango/core/app';
 import { ADD_WEBVIEW, WEBVIEW_SERVICE } from '../constants';
-import type { _WebViewCreateOptionsDrawable, _WebViewCreateOptionsOverlay } from '@altv/client';
 import type { ClientLoggerService, ClientWebViewService } from '../services';
-import { LOGGER_SERVICE } from '@altv-mango/core';
+import { LOGGER_SERVICE } from '@ragemp-mango/core';
+import type { MultiplayerWebViewCreateOptionsDrawable, MultiplayerWebViewCreateOptionsOverlay } from '../interfaces';
 
 @injectable()
 export class WebViewPlugin implements MangoPlugin {
@@ -18,7 +18,7 @@ export class WebViewPlugin implements MangoPlugin {
             ? this.internalAppContainer.get<
                   {
                       id: string | number;
-                      options: _WebViewCreateOptionsDrawable | _WebViewCreateOptionsOverlay;
+                      options: MultiplayerWebViewCreateOptionsDrawable | MultiplayerWebViewCreateOptionsOverlay;
                   }[]
               >(ADD_WEBVIEW)
             : [];

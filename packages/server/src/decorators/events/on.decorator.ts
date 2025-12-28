@@ -1,8 +1,7 @@
-import { On as $On } from '@altv-mango/core';
-import type { Events as ServerEvents } from '@altv/server';
+import { On as $On } from '@ragemp-mango/core';
 
-export function On<E extends keyof ServerEvents.CustomServerEvent>(eventName?: E): MethodDecorator;
-export function On<E extends string>(eventName?: Exclude<E, keyof ServerEvents.CustomServerEvent>): MethodDecorator;
-export function On<E extends string>(eventName?: Exclude<E, keyof ServerEvents.CustomServerEvent>) {
+export function On<E extends keyof MangoEvents.CustomServerEvent>(eventName?: E): MethodDecorator;
+export function On<E extends string>(eventName?: Exclude<E, keyof MangoEvents.CustomServerEvent>): MethodDecorator;
+export function On<E extends string>(eventName?: Exclude<E, keyof MangoEvents.CustomServerEvent>) {
     return $On(eventName);
 }

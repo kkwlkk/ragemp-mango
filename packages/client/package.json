@@ -1,10 +1,10 @@
 {
-    "name": "@altv-mango/client",
+    "name": "@ragemp-mango/client",
     "version": "2.0.6-beta",
-    "homepage": "https://altv-mango.vercel.app",
+    "homepage": "https://github.com/your-repo/ragemp-mango",
     "repository": {
         "type": "git",
-        "url": "https://github.com/altv-mango/altv-mango",
+        "url": "https://github.com/your-repo/ragemp-mango",
         "directory": "packages/client"
     },
     "license": "MIT",
@@ -12,12 +12,12 @@
     "type": "module",
     "exports": {
         ".": {
-            "default": "./dist/index.js",
-            "types": "./dist/index.d.ts"
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
         },
         "./utils": {
-            "default": "./dist/utils/index.js",
-            "types": "./dist/utils/index.d.ts"
+            "types": "./dist/utils/index.d.ts",
+            "default": "./dist/utils/index.js"
         }
     },
     "main": "dist/index.js",
@@ -33,6 +33,7 @@
     },
     "dependencies": {},
     "devDependencies": {
+        "@ragemp-mango/core": "workspace:^",
         "@abraham/reflection": "^0.12.0",
         "@rollup/plugin-commonjs": "^25.0.7",
         "@rollup/plugin-node-resolve": "^15.2.3",
@@ -44,12 +45,8 @@
         "typescript": "^5.4.5"
     },
     "peerDependencies": {
-        "@altv-mango/core": "workspace:^",
-        "@altv/client": "^0.0.34",
-        "@altv/natives": "^0.0.8",
-        "@altv/shared": "^0.0.16",
-        "@altv/types-client": "^16.2.2",
-        "@altv/types-shared": "^16.2.1",
+        "@ragemp-mango/core": "workspace:^",
+        "@ragempcommunity/types-client": "^2.1.8",
         "inversify": "^6.0.2"
     },
     "publishConfig": {

@@ -1,29 +1,14 @@
-declare module '@altv/shared' {
-    export namespace RPC {
-        export interface CustomClientToServerRPC {}
-        export interface CustomClientToWebviewRPC {}
-        export interface CustomServerToClientRPC {}
-        export interface CustomServerToWebViewRPC {}
-        export interface CustomWebViewToClientRPC {}
-        export interface CustomWebViewToServerRPC {}
+// RageMP WebView type extensions
+// These are empty placeholders - extend MangoEvents and MangoRPC namespaces in your project
+
+declare global {
+    namespace MangoEvents {
+        // Extend these in your project
     }
 
-    export namespace Events {
-        export interface CustomWebViewToServerEvent {}
-        export interface CustomServerToWebViewEvent {}
-        export interface CustomClientToWebViewEvent {}
-        export interface CustomServerToPlayerEvent {}
-        export interface CustomPlayerToServerEvent {}
-        export interface CustomWebViewToClientEvent {}
+    namespace MangoRPC {
+        // Extend these in your project
     }
 }
 
-declare module '@altv/webview' {
-    export namespace RPC {
-        export interface CustomWebViewRPC {}
-    }
-
-    export namespace Events {
-        export interface CustomWebViewEvent {}
-    }
-}
+export {};

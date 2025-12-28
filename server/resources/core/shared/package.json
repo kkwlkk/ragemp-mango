@@ -1,5 +1,5 @@
 {
-    "name": "@altv-resource/shared",
+    "name": "@ragemp-resource/shared",
     "type": "module",
     "scripts": {
         "typecheck": "tsc --noEmit"

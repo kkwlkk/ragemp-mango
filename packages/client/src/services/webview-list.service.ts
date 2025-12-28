@@ -1,6 +1,6 @@
 
 import { inject, injectable } from 'inversify';
-import { ErrorMessage, LOGGER_SERVICE, isNil, type LoggerService } from '@altv-mango/core';
+import { ErrorMessage, LOGGER_SERVICE, isNil, type LoggerService } from '@ragemp-mango/core';
 import type { MultiplayerWebView } from '../interfaces';
 
 @injectable()

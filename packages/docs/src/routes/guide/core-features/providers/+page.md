@@ -104,7 +104,7 @@ const deliciousMango = {
 The Mango Framework supports three scopes for providers: `Singleton`, `Transient`, and `Request`. The default scope is `Singleton`.
 
 ```typescript
-import { InjectableScope } from '@altv-mango/server'; // [svp! ++]
+import { InjectableScope } from '@ragemp-mango/server'; // [svp! ++]
 
 const deliciousMango = {
     provide: DeliciousMangoService,

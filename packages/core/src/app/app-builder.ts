@@ -32,7 +32,6 @@ import { AppRuntime, ModuleDependencyBinder, ModuleTreeScanner } from './module-
 import { Controller } from './controller';
 import { ExecutionContextBase, MangoRequestBase, MangoResponseBase } from './pipeline';
 import type { ExecutionContextType } from './enums';
-import type { Player } from '@altv/server';
 import { REFLECTOR_SERVICE } from '../constants';
 import { ReflectorService } from '../services';
 
@@ -147,7 +146,7 @@ export class AppBuilder<G extends Guard = Guard, I extends Interceptor = Interce
         // Mango Request and Response bindings
         this.internalAppContainer.bind(MangoRequestBase).toSelf().inTransientScope();
         this.internalAppContainer.bind(MANGO_REQUEST_FACTORY).toFactory((context) => {
-            return (body: unknown, player: Player) => {
+            return (body: unknown, player: PlayerMp) => {
                 const request = context.container.get(MangoRequestBase);
                 request.$body = body;
                 request.$player = player;

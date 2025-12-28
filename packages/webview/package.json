@@ -1,10 +1,10 @@
 {
-    "name": "@altv-mango/webview",
+    "name": "@ragemp-mango/webview",
     "version": "2.0.6-beta",
-    "homepage": "https://altv-mango.vercel.app",
+    "homepage": "https://github.com/your-repo/ragemp-mango",
     "repository": {
         "type": "git",
-        "url": "https://github.com/altv-mango/altv-mango",
+        "url": "https://github.com/your-repo/ragemp-mango",
         "directory": "packages/webview"
     },
     "license": "MIT",
@@ -23,14 +23,14 @@
     },
     "dependencies": {},
     "devDependencies": {
+        "@ragemp-mango/core": "workspace:^",
         "tsup": "^8.0.2",
         "typescript": "^5.4.5",
         "@abraham/reflection": "^0.12.0"
     },
     "peerDependencies": {
-        "@altv-mango/core": "workspace:^",
-        "@altv/shared": "^0.0.16",
-        "@altv/webview": "^0.0.6"
+        "@ragemp-mango/core": "workspace:^",
+        "@ragempcommunity/types-cef": "^2.1.8"
     },
     "publishConfig": {
         "access": "public",

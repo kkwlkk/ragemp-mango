@@ -1,79 +1,83 @@
-import type { Events } from '@altv/shared';
 import type { RPCPayload } from '../src/app';
 
-declare module '@altv/shared' {
-    export namespace RPC {
-        // Client
-        export interface CustomClientToServerRPC {}
-        export interface CustomClientToWebviewRPC {}
-        // Server
-        export interface CustomServerToClientRPC {}
-        export interface CustomServerToWebViewRPC {}
-        // WebView
-        export interface CustomWebViewToClientRPC {}
-        export interface CustomWebViewToServerRPC {}
-    }
+// RageMP Mango Framework type declarations
 
-    export namespace Events {
-        // AltV events types: https://github.com/altmp/altv-js-module-v2/blob/dev/shared/js/events.js#L374-L378
-        // TODO: remove
-        export function emitRaw(eventName: string, ...args: any[]): void;
-        export function on(eventName: string, listener: (...args: any[]) => void): Events.ScriptEventHandler;
-        export function once(eventName: string, listener: (...args: any[]) => void): Events.ScriptEventHandler;
-        export function unsubscribeScriptEvent(local: boolean, eventName: string, listener: (...args: any[]) => void): void;
+declare global {
+    // Namespace for custom event declarations
+    namespace MangoEvents {
+        // Client-side events
+        interface CustomClientEvent {}
 
-        // Mango
-        export interface CustomWebViewToServerEvent {}
-        export interface CustomServerToWebViewEvent {
-            'RPC::CALL_WEBVIEW': (body: RPCPayload) => Promise<void>;
-        }
-        export interface CustomWebViewToWebViewEvent {}
-        // altV
-        export interface CustomClientToWebViewEvent {
-            'RPC::CALL_WEBVIEW': (body: RPCPayload) => Promise<void>;
-        }
-        export interface CustomServerToPlayerEvent {
-            'SERVER::EMIT_WEBVIEW': (body: { payload: unknown; id: string | number; eventName: string }) => void;
-            'RPC::CALL_CLIENT': (body: RPCPayload) => Promise<void>;
-        }
-        export interface CustomPlayerToServerEvent {
+        // Server-side events
+        interface CustomServerEvent {}
+
+        // WebView events
+        interface CustomWebViewEvent {}
+
+        // Player to Server events
+        interface CustomPlayerToServerEvent {
             'RPC::CALL_SERVER': (body: RPCPayload) => Promise<void>;
         }
 
-        export interface CustomWebViewToClientEvent {
+        // Server to Player events
+        interface CustomServerToPlayerEvent {
+            'SERVER::EMIT_WEBVIEW': (body: { payload: unknown; id: string | number; eventName: string }) => void;
+            'RPC::CALL_CLIENT': (body: RPCPayload) => Promise<void>;
+        }
+
+        // WebView to Client events
+        interface CustomWebViewToClientEvent {
             'RPC::CALL_CLIENT': (body: RPCPayload) => Promise<void>;
             'RPC::CALL_SERVER': (body: RPCPayload) => void;
             'WEBVIEW::EMIT_SERVER': (body: { eventName: string; payload: Record<string, unknown> }) => void;
         }
+
+        // Client to WebView events
+        interface CustomClientToWebViewEvent {
+            'RPC::CALL_WEBVIEW': (body: RPCPayload) => Promise<void>;
+        }
+
+        // WebView to Server events
+        interface CustomWebViewToServerEvent {}
+
+        // Server to WebView events
+        interface CustomServerToWebViewEvent {
+            'RPC::CALL_WEBVIEW': (body: RPCPayload) => Promise<void>;
+        }
+
+        // WebView to WebView events
+        interface CustomWebViewToWebViewEvent {}
+    }
+
+    // Namespace for custom RPC declarations
+    namespace MangoRPC {
+        // Client RPCs
+        interface CustomClientRPC {}
+
+        // Server RPCs
+        interface CustomServerRPC {}
+
+        // WebView RPCs
+        interface CustomWebViewRPC {}
+
+        // Client to Server RPCs
+        interface CustomClientToServerRPC {}
+
+        // Server to Client RPCs
+        interface CustomServerToClientRPC {}
+
+        // Client to WebView RPCs
+        interface CustomClientToWebviewRPC {}
+
+        // WebView to Client RPCs
+        interface CustomWebViewToClientRPC {}
+
+        // Server to WebView RPCs
+        interface CustomServerToWebViewRPC {}
+
+        // WebView to Server RPCs
+        interface CustomWebViewToServerRPC {}
     }
 }
 
-declare module '@altv/server' {
-    export namespace RPC {
-        export interface CustomServerRPC {}
-    }
-
-    export namespace Events {
-        export interface CustomServerEvent {}
-    }
-}
-
-declare module '@altv/client' {
-    export namespace RPC {
-        export interface CustomClientRPC {}
-    }
-
-    export namespace Events {
-        export interface CustomClientEvent {}
-    }
-}
-
-declare module '@altv/webview' {
-    export namespace RPC {
-        export interface CustomWebViewRPC {}
-    }
-
-    export namespace Events {
-        export interface CustomWebViewEvent {}
-    }
-}
+export {};

@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { WEBVIEW_LIST_SERVICE } from '../constants';
 import type { WebViewListService } from './webview-list.service';
-import { ErrorMessage, isNumber, isString, LOGGER_SERVICE, type LoggerService } from '@altv-mango/core';
+import { ErrorMessage, isNumber, isString, LOGGER_SERVICE, type LoggerService } from '@ragemp-mango/core';
 import type { WebViewService } from '../interfaces';
 import type {
     ClientMultiplayerService,
@@ -9,7 +9,7 @@ import type {
     MultiplayerWebViewCreateOptionsDrawable,
     MultiplayerWebViewCreateOptionsOverlay,
 } from '../interfaces/multiplayer';
-import { MULTIPLAYER_SERVICE } from '@altv-mango/core/app';
+import { MULTIPLAYER_SERVICE } from '@ragemp-mango/core/app';
 
 @injectable()
 export class ClientWebViewService implements WebViewService {

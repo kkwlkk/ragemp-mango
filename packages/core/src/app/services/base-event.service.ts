@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import { ErrorMessage } from '../../enums';
 import type { EventEmmiter, ScriptEventHandler } from '../interfaces';
-import type { Events as SharedEvents } from '@altv/shared';
+import type { EventHandler } from '../../interfaces';
 
 @injectable()
 export abstract class BaseEventService<T extends Record<string, any>> {
@@ -38,7 +38,7 @@ export abstract class BaseEventService<T extends Record<string, any>> {
         if (!this.$internalEventNames.has(eventName)) {
             throw new Error(ErrorMessage.InvalidInternalEventName);
         }
-        const eventHandler = <SharedEvents.EventHandler>this.$eventEmmiter.on(eventName, handler);
+        const eventHandler = <EventHandler>this.$eventEmmiter.on(eventName, handler);
         this.$internalHandlers.add(eventHandler);
         return eventHandler;
     }

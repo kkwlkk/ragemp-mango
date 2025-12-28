@@ -1,4 +1,4 @@
-import { AppBuilder, AppEnviroment, createAppBuilder as $createAppBuilder } from '@altv-mango/core/app';
+import { AppBuilder, AppEnviroment, createAppBuilder as $createAppBuilder } from '@ragemp-mango/core/app';
 import { ADD_WEBVIEW } from './constants';
 import { EventMediatorPlugin, RPCPlugin, ServiceBinderPlugin, WebViewPlugin } from './plugins';
 import type {
@@ -9,12 +9,9 @@ import type {
     MultiplayerWebViewCreateOptionsDrawable,
     MultiplayerWebViewCreateOptionsOverlay,
 } from './interfaces';
+import { ClientRageMPMultiplayerService } from './multiplayer/ragemp';
 
-const sharedV1 = await import('alt-shared').catch(() => false);
-const multiplayerService: ClientMultiplayerService =
-    sharedV1 !== false && typeof sharedV1 !== 'boolean'
-        ? new ClientAltMultiplayerServceV1(sharedV1.default, (await import('alt-client')).default)
-        : new ClientAltMultiplayerServceV2(await import('@altv/shared'), await import('@altv/client'));
+const multiplayerService: ClientMultiplayerService = new ClientRageMPMultiplayerService();
 
 class ClientAppBuilder extends AppBuilder<Guard, Interceptor, ErrorFilter> {
     public addWebView(id: string | number, options: MultiplayerWebViewCreateOptionsDrawable): ClientAppBuilder;
@@ -140,5 +137,5 @@ export async function createAppBuilder() {
 
 export * from './exports';
 
-import './extension.d.ts';import { ClientAltMultiplayerServceV1, ClientAltMultiplayerServceV2 } from './multiplayer';
+import './extension.d.ts';
 

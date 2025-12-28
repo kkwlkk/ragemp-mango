@@ -1,12 +1,9 @@
-import { createAppBuilder as $createAppBuilder, AppBuilder, AppEnviroment } from '@altv-mango/core/app';
+import { createAppBuilder as $createAppBuilder, AppBuilder, AppEnviroment } from '@ragemp-mango/core/app';
 import { PlayerPrototypePlugin, RPCPlugin, ServiceBinderPlugin } from './plugins';
 import type { ErrorFilter, Guard, Interceptor, ServerMultiplayerService } from './interfaces';
+import { ServerRageMPMultiplayerService } from './multiplayer/ragemp';
 
-const sharedV1 = await import('alt-shared').catch(() => false);
-const multiplayerService: ServerMultiplayerService =
-    sharedV1 !== false && typeof sharedV1 !== 'boolean'
-        ? new ServerAltMultiplayerServceV1(sharedV1, await import('alt-server'))
-        : new ServerAltMultiplayerServceV2(await import('@altv/shared'), await import('@altv/server'));
+const multiplayerService: ServerMultiplayerService = new ServerRageMPMultiplayerService();
 
 class ServerAppBuilder extends AppBuilder<Guard, Interceptor, ErrorFilter> {
     public setBlipFactory(factory: unknown) {
@@ -66,4 +63,3 @@ export async function createAppBuilder() {
 export * from './exports';
 
 import './extension.d.ts';
-import { ServerAltMultiplayerServceV1, ServerAltMultiplayerServceV2 } from './multiplayer';

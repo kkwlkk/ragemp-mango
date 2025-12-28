@@ -1,10 +1,10 @@
 {
-    "name": "@altv-mango/server",
+    "name": "@ragemp-mango/server",
     "version": "2.0.6-beta",
-    "homepage": "https://altv-mango.vercel.app",
+    "homepage": "https://github.com/your-repo/ragemp-mango",
     "repository": {
         "type": "git",
-        "url": "https://github.com/altv-mango/altv-mango",
+        "url": "https://github.com/your-repo/ragemp-mango",
         "directory": "packages/server"
     },
     "license": "MIT",
@@ -22,13 +22,13 @@
         "types": "tsup --dts-only"
     },
     "dependencies": {
-        "@altv/types-shared": "^16.2.1",
         "cache-manager": "^5.5.2",
         "dotenv": "^16.4.5",
         "dotenv-expand": "^11.0.6",
         "lodash": "^4.17.21"
     },
     "devDependencies": {
+        "@ragemp-mango/core": "workspace:^",
         "@abraham/reflection": "^0.12.0",
         "@rollup/plugin-commonjs": "^25.0.7",
         "@rollup/plugin-node-resolve": "^15.2.3",
@@ -41,10 +41,8 @@
         "typescript": "^5.4.5"
     },
     "peerDependencies": {
-        "@altv-mango/core": "workspace:^",
-        "@altv/server": "^0.0.40",
-        "@altv/shared": "^0.0.16",
-        "@altv/types-server": "^16.2.1",
+        "@ragemp-mango/core": "workspace:^",
+        "@ragempcommunity/types-server": "^2.1.8",
         "inversify": "^6.0.2"
     },
     "publishConfig": {

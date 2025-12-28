@@ -1,4 +1,4 @@
-import { Controller, Cron, Inject, LOGGER_SERVICE, Module, type LoggerService } from '@altv-mango/client';
+import { Controller, Cron, Inject, LOGGER_SERVICE, Module, type LoggerService } from '@ragemp-mango/client';
 
 @Controller()
 export class RootController {

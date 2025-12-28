@@ -1,11 +1,10 @@
-import type { Player } from '@altv/server';
 import { injectable } from 'inversify';
 import type { MangoRequest } from '../interfaces';
 
 @injectable()
 export class MangoRequestBase<TData = unknown> implements MangoRequest {
     public $body: TData;
-    public $player?: Player;
+    public $player?: PlayerMp;
 
     public get body() {
         return this.$body;

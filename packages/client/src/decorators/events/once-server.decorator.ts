@@ -1,8 +1,7 @@
-import { createEventDecorator } from '@altv-mango/core';
-import type { Events as SharedEvents } from '@altv/shared';
+import { createEventDecorator } from '@ragemp-mango/core';
 
-export function OnceServer<E extends keyof SharedEvents.CustomServerToPlayerEvent>(eventName?: E): MethodDecorator;
-export function OnceServer<E extends string>(eventName?: Exclude<E, keyof SharedEvents.CustomServerToPlayerEvent>): MethodDecorator;
-export function OnceServer<E extends string>(eventName?: Exclude<E, keyof SharedEvents.CustomServerToPlayerEvent>) {
+export function OnceServer<E extends keyof MangoEvents.CustomServerToPlayerEvent>(eventName?: E): MethodDecorator;
+export function OnceServer<E extends string>(eventName?: Exclude<E, keyof MangoEvents.CustomServerToPlayerEvent>): MethodDecorator;
+export function OnceServer<E extends string>(eventName?: Exclude<E, keyof MangoEvents.CustomServerToPlayerEvent>) {
     return createEventDecorator('onceServer', eventName);
 }

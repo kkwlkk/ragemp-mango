@@ -23,7 +23,7 @@
         "emitDecoratorMetadata": true,
         "strictPropertyInitialization": false,
         "verbatimModuleSyntax": true,
-        "typeRoots": ["./node_modules/@types", "./node_modules/@altv", "./node_modules/@abraham", "./node_modules/@altv-mango"],
+        "typeRoots": ["./node_modules/@types", "./node_modules/@abraham", "./node_modules/@ragemp-mango", "./types"],
         "stripInternal": true
     },
     "include": ["./src/**/*.ts", "./types/**/*.d.ts"],

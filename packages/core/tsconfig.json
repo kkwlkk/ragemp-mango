@@ -23,7 +23,7 @@
         "emitDecoratorMetadata": true,
         "strictPropertyInitialization": false,
         "verbatimModuleSyntax": true,
-        "typeRoots": ["./node_modules/@types", "./node_modules/@altv", "./node_modules/@abraham", "./types"],
+        "typeRoots": ["./node_modules/@types", "./node_modules/@abraham", "./types"],
         "stripInternal": true
     },
     "include": ["./src/**/*.ts", "./types/**/*.d.ts"],

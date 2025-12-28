@@ -12,14 +12,14 @@ title: Setup
 
 Install the package inside your webview project (Vite, Webpack, etc.) using the following command:
 
-@install-pkg(@altv-mango/webview)
+@install-pkg(@ragemp-mango/webview)
 
 ## Initialization
 
-To initialize the Mango object, you need to use the `initMango` function from the `@altv-mango/webview` package.
+To initialize the Mango object, you need to use the `initMango` function from the `@ragemp-mango/webview` package.
 
 ```ts
-import { initMango } from '@altv-mango/webview';
+import { initMango } from '@ragemp-mango/webview';
 ```
 
 `initMango` will attach the `mango` object to the `window` object and return the object itself. This object contains all the methods and properties that you need to use in the WebView to communicate with the server and the client.
@@ -39,7 +39,7 @@ Svelte has a built-in `onMount` function that you can use to initialize the Mang
 ```svelte
 <script>
     import { onMount } from 'svelte';
-    import { initMango } from '@altv-mango/webview';
+    import { initMango } from '@ragemp-mango/webview';
 
     onMount(() => {
         const mango = initMango();

@@ -173,7 +173,7 @@ const config = defineConfig({
                         },
                     ],
                 },
-                github: 'https://github.com/altv-mango/altv-mango',
+                github: 'https://github.com/ragemp-mango/ragemp-mango',
                 logo: '/mango.png',
                 highlighter: {
                     languages: ['svelte', 'sh', 'js', 'html', 'ts', 'md', 'css', 'scss', 'json', 'tsx'],
@@ -181,13 +181,13 @@ const config = defineConfig({
                 docsearch: {
                     apiKey: '7823e6cece5e8ca5c8cc254bb3e6a228',
                     appId: 'VZAZMXLGRB',
-                    indexName: 'altv-mango',
+                    indexName: 'ragemp-mango',
                 },
-                editLink: 'https://github.com/altv-mango/altv-mango/tree/main/packages/docs/src/routes:route',
+                editLink: 'https://github.com/ragemp-mango/ragemp-mango/tree/main/packages/docs/src/routes:route',
             }),
             siteConfig: {
                 title: 'Mango Framework',
-                description: 'Create your own alt:V server with ease',
+                description: 'Create your own RageMP server with ease',
             },
             addInspect: true,
         }),

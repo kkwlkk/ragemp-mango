@@ -1,4 +1,4 @@
-import type { ClassProvider, ExistingProvider, Provider } from '@altv-mango/server';
+import type { ClassProvider, ExistingProvider, Provider } from '@ragemp-mango/server';
 import type { CacheManagerOptions } from './cache-manager.interface';
 
 export type CacheOptions<StoreConfig extends Record<any, any> = Record<string, any>> = CacheManagerOptions & StoreConfig;

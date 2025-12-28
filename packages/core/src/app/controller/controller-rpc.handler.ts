@@ -8,7 +8,6 @@ import { PipelineHandler } from './pipeline.handler';
 import type { RPCMetadata } from '../interfaces';
 import { AppEnviroment, ExecutionContextType } from '../enums';
 import { ExecutionContextBase, type MangoRequestBase, type MangoResponseBase } from '../pipeline';
-import type { Player } from '@altv/server';
 import { ErrorMessage } from '../../enums';
 import type { CallHandler, LoggerService, Pipe } from '../../interfaces';
 import type { Controller } from './controller';
@@ -21,7 +20,7 @@ export class ControllerRPCHandler {
     @inject(PipelineHandler) private readonly pipelineHandler: PipelineHandler;
     @inject(ControllerFlowHandler) private readonly controllerFlowHandler: ControllerFlowHandler;
     @inject(LOGGER_SERVICE) private readonly loggerService: LoggerService;
-    @inject(MANGO_REQUEST_FACTORY) private readonly createMangoRequest: (data: unknown, player?: Player) => MangoRequestBase;
+    @inject(MANGO_REQUEST_FACTORY) private readonly createMangoRequest: (data: unknown, player?: PlayerMp) => MangoRequestBase;
     @inject(MANGO_RESPONSE_FACTORY) private readonly createMangoResponse: () => MangoResponseBase;
     @inject(EXECUTION_CONTEXT_FACTORY) private readonly createExecutionContext: (
         type: ExecutionContextType,
@@ -55,7 +54,7 @@ export class ControllerRPCHandler {
         } else if (rpc.type === 'onWebViewRequest') {
             return this.rpcService[rpc.type](rpc.webViewId!, rpc.name, async (...args: unknown[]) => {
                 const body = this.appEnv === AppEnviroment.Server ? args[1] : args[0];
-                const player = this.appEnv === AppEnviroment.Server ? <Player>args[0] : undefined;
+                const player = this.appEnv === AppEnviroment.Server ? <PlayerMp>args[0] : undefined;
                 return this.handleRPC(guards, interceptors, pipes, mappedErrorFilters, controller, rpc, body, player);
             });
         }
@@ -72,7 +71,7 @@ export class ControllerRPCHandler {
         controller: Controller,
         rpc: RPCMetadata,
         body: unknown,
-        player?: Player,
+        player?: PlayerMp,
     ) {
         return new Promise(async (resolve) => {
             const request = this.createMangoRequest(
