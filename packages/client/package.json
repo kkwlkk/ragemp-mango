@@ -1,14 +1,15 @@
 {
     "name": "@ragemp-mango/client",
-    "version": "2.0.6-beta",
-    "homepage": "https://github.com/your-repo/ragemp-mango",
+    "version": "2.0.6-beta.0",
+    "homepage": "https://github.com/kkwlkk/ragemp-mango",
     "repository": {
         "type": "git",
-        "url": "https://github.com/your-repo/ragemp-mango",
+        "url": "https://github.com/kkwlkk/ragemp-mango",
         "directory": "packages/client"
     },
     "license": "MIT",
-    "author": "5exyGuy (Aurėjus Remeika)",
+    "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
+    "description": "Client-side package for the RageMP Mango Framework - a decorator-driven TypeScript framework for RageMP servers.",
     "type": "module",
     "exports": {
         ".": {

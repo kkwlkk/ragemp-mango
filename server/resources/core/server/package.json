@@ -1,5 +1,7 @@
 {
     "name": "@ragemp-resource/server",
+    "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
+    "description": "Example server resource for the RageMP Mango Framework.",
     "type": "module",
     "scripts": {
         "build": "tsup",

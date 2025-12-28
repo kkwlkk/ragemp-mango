@@ -1,5 +1,7 @@
 {
     "name": "@ragemp-resource/client",
+    "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
+    "description": "Example client resource for the RageMP Mango Framework.",
     "type": "module",
     "scripts": {
         "build": "tsup",

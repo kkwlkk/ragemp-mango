@@ -1,5 +1,7 @@
 {
     "name": "@ragemp-resource/shared",
+    "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
+    "description": "Example shared resource for the RageMP Mango Framework.",
     "type": "module",
     "scripts": {
         "typecheck": "tsc --noEmit"

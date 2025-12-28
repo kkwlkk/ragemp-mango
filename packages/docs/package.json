@@ -2,6 +2,8 @@
     "name": "@ragemp-mango/docs",
     "private": true,
     "license": "MIT",
+    "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
+    "description": "Documentation for the RageMP Mango Framework.",
     "type": "module",
     "scripts": {
         "build": "vite build",

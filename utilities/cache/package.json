@@ -1,14 +1,15 @@
 {
     "name": "@ragemp-mango/cache",
     "version": "1.0.0",
-    "homepage": "https://github.com/ragemp-mango/ragemp-mango",
+    "homepage": "https://github.com/kkwlkk/ragemp-mango",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ragemp-mango/ragemp-mango",
+        "url": "https://github.com/kkwlkk/ragemp-mango",
         "directory": "utilities/cache"
     },
     "license": "MIT",
-    "author": "5exyGuy (Aurėjus Remeika)",
+    "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
+    "description": "Cache utility for the RageMP Mango Framework.",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",

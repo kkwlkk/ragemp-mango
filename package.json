@@ -2,8 +2,8 @@
     "name": "ragemp-mango",
     "private": true,
     "license": "MIT",
-    "author": "5exyGuy (Aurėjus Remeika)",
-    "description": "A decorator-driven TypeScript framework for RageMP multiplayer game servers",
+    "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
+    "description": "A decorator-driven TypeScript framework for RageMP multiplayer game servers. Port of the original altv-mango framework.",
     "scripts": {
         "build": "turbo run build --filter=@ragemp-mango/* --filter=!@ragemp-mango/docs",
         "build-test": "turbo run build --filter=@ragemp-resource/*",
