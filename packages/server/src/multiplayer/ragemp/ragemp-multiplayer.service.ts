@@ -79,4 +79,33 @@ export class ServerRageMPMultiplayerService extends RageMPMultiplayerService imp
         // RageMP voice is handled differently
         // Could implement custom voice channel management
     }
+
+    // Override logging methods - RageMP server uses console.log, not mp.console.logInfo
+    public override log(arg: any, ...args: any[]): void {
+        const message = [arg, ...args].map(a =>
+            typeof a === 'object' ? JSON.stringify(a) : String(a)
+        ).join(' ');
+        console.log(message);
+    }
+
+    public override logError(arg: any, ...args: any[]): void {
+        const message = [arg, ...args].map(a =>
+            typeof a === 'object' ? JSON.stringify(a) : String(a)
+        ).join(' ');
+        console.error(message);
+    }
+
+    public override logWarning(arg: any, ...args: any[]): void {
+        const message = [arg, ...args].map(a =>
+            typeof a === 'object' ? JSON.stringify(a) : String(a)
+        ).join(' ');
+        console.warn(message);
+    }
+
+    public override logDebug(arg: any, ...args: any[]): void {
+        const message = [arg, ...args].map(a =>
+            typeof a === 'object' ? JSON.stringify(a) : String(a)
+        ).join(' ');
+        console.log(`[DEBUG] ${message}`);
+    }
 }
