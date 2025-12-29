@@ -9,7 +9,7 @@
                 "build-test": "turbo run build --filter=@ragemp-resource/*",
                 "dev": "turbo run dev --filter=@ragemp-mango/*",
                 "dev-test": "turbo run dev --filter=@ragemp-resource/*",
-                "publish": "pnpm run build --force && pnpm run types --force && pnpm publish --access public --filter \"@ragemp-mango/core\" --filter \"@ragemp-mango/server\" --filter \"@ragemp-mango/client\" --filter \"@ragemp-mango/webview\"",
+                "publish": "pnpm run build --force && pnpm run types --force && pnpm publish --access public --no-git-checks --filter \"@ragemp-mango/core\" --filter \"@ragemp-mango/server\" --filter \"@ragemp-mango/client\" --filter \"@ragemp-mango/webview\"",
                 "typecheck": "turbo run typecheck --filter=@ragemp-mango/*",
                 "typecheck-test": "turbo run typecheck --filter=@ragemp-resource/*",
                 "types": "turbo run types --filter=@ragemp-mango/*"
