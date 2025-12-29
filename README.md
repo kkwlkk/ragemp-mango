@@ -1,6 +1,6 @@
 ## Mango Framework
 
-A simple, lightweight, and powerful TypeScript framework for building RageMP servers.
+A simple, lightweight, and powerful TypeScript framework for building RageMP servers. Port of the original [AltV Mango Framework](https://github.com/altv-mango/altv-mango)
 
 ## Features
 
