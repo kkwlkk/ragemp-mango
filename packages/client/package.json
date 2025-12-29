@@ -1,6 +1,6 @@
 {
     "name": "@ragemp-mango/client",
-    "version": "2.0.6-beta.1",
+    "version": "1.0.0",
     "homepage": "https://github.com/kkwlkk/ragemp-mango",
     "repository": {
         "type": "git",
@@ -32,10 +32,9 @@
         "typecheck": "tsc --noEmit",
         "types": "tsup --dts-only"
     },
-    "dependencies": {},
     "devDependencies": {
-        "@ragemp-mango/core": "workspace:^",
         "@abraham/reflection": "^0.12.0",
+        "@ragemp-mango/core": "workspace:^",
         "@rollup/plugin-commonjs": "^25.0.7",
         "@rollup/plugin-node-resolve": "^15.2.3",
         "@types/node": "^20.12.11",

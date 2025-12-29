@@ -1,6 +1,6 @@
 {
     "name": "@ragemp-mango/core",
-    "version": "2.0.6-beta.1",
+    "version": "1.0.0",
     "homepage": "https://github.com/kkwlkk/ragemp-mango",
     "repository": {
         "type": "git",
@@ -113,9 +113,9 @@
         "inversify": "^6.0.2"
     },
     "peerDependencies": {
-        "@ragempcommunity/types-server": "^2.1.8",
+        "@ragempcommunity/types-cef": "^2.1.8",
         "@ragempcommunity/types-client": "^2.1.8",
-        "@ragempcommunity/types-cef": "^2.1.8"
+        "@ragempcommunity/types-server": "^2.1.8"
     },
     "devDependencies": {
         "@abraham/reflection": "^0.12.0",

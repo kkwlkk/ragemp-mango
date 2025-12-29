@@ -1,6 +1,6 @@
 {
     "name": "@ragemp-mango/webview",
-    "version": "2.0.6-beta.1",
+    "version": "1.0.0",
     "homepage": "https://github.com/kkwlkk/ragemp-mango",
     "repository": {
         "type": "git",
@@ -22,12 +22,11 @@
         "typecheck": "tsc --noEmit",
         "types": "tsup --dts-only"
     },
-    "dependencies": {},
     "devDependencies": {
+        "@abraham/reflection": "^0.12.0",
         "@ragemp-mango/core": "workspace:^",
         "tsup": "^8.0.2",
-        "typescript": "^5.4.5",
-        "@abraham/reflection": "^0.12.0"
+        "typescript": "^5.4.5"
     },
     "peerDependencies": {
         "@ragemp-mango/core": "workspace:^",
