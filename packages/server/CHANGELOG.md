@@ -1,5 +1,16 @@
 # @ragemp-mango/server
 
+## 2.1.0
+
+### Minor Changes
+
+-   09b1422: feat: make AppBuilder bundle-friendly
+
+### Patch Changes
+
+-   Updated dependencies [09b1422]
+    -   @ragemp-mango/core@1.2.0
+
 ## 2.0.2
 
 ### Patch Changes
