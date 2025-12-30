@@ -34,7 +34,7 @@ export default defineConfig({
     bundle: true,
     minify: false,
     external: Object.keys(packageJson.dependencies).filter((dep) => dep !== 'reflect-metadata'),
-    dts: false,
+    dts: true,
     noExternal: Object.keys(packageJson.devDependencies),
     // esbuildPlugins: [polyfillNode()],
 });
