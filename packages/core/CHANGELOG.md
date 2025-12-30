@@ -1,5 +1,11 @@
 # @ragemp-mango/core
 
+## 3.1.2
+
+### Patch Changes
+
+-   77c9d16: fix: reflection
+
 ## 3.1.1
 
 ### Patch Changes
