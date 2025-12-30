@@ -1,5 +1,11 @@
 # @ragemp-mango/core
 
+## 3.1.1
+
+### Patch Changes
+
+-   83abac4: fix: external dep
+
 ## 3.1.0
 
 ### Minor Changes
