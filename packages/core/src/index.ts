@@ -1,4 +1,4 @@
-import '@abraham/reflection';
+import 'reflect-metadata';
 
 export * from './constants';
 export * from './decorators';

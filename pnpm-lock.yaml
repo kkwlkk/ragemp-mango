@@ -57,9 +57,6 @@ importers:
 
   packages/core:
     dependencies:
-      '@abraham/reflection':
-        specifier: ^0.12.0
-        version: 0.12.0
       '@ragempcommunity/types-cef':
         specifier: ^2.1.8
         version: 2.1.9
@@ -75,6 +72,9 @@ importers:
       inversify:
         specifier: ^6.0.2
         version: 6.2.2(reflect-metadata@0.2.2)
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
     devDependencies:
       '@microsoft/api-extractor':
         specifier: ^7.43.4

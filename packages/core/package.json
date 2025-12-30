@@ -109,7 +109,7 @@
         "types": "tsup --dts-only"
     },
     "dependencies": {
-        "@abraham/reflection": "^0.12.0",
+        "reflect-metadata": "^0.2.2",
         "croner": "^8.0.2",
         "inversify": "^6.0.2"
     },

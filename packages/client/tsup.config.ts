@@ -9,7 +9,7 @@ export default defineConfig({
     format: 'esm',
     bundle: true,
     minify: false,
-    dts: true,
+    dts: false,
     external: [
         ...Object.keys(packageJson.dependencies),
         ...Object.keys(packageJson.peerDependencies),
