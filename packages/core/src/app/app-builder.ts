@@ -1,6 +1,5 @@
 import { validateErrorFilter, validateGuard, validateInterceptor, validatePipe } from '../schemas/events';
 import {
-    INTERNAL_APP_CONTAINER,
     GLOBAL_ERROR_FILTERS,
     GLOBAL_GUARDS,
     GLOBAL_INTERCEPTORS,
@@ -8,7 +7,6 @@ import {
     ENABLE_SHUTDOWN_HOOKS,
     PLUGINS,
     GLOBAL_APP_CONTAINER,
-    APP_ENVIROMENT,
     MANGO_REQUEST_FACTORY,
     MANGO_RESPONSE_FACTORY,
     EXECUTION_CONTEXT_FACTORY,
@@ -16,7 +14,8 @@ import {
     MULTIPLAYER_SERVICE,
 } from './constants';
 import type { Newable } from '../types';
-import { inject, Container, injectable, type interfaces } from 'inversify';
+import { Container } from 'inversify';
+import type { interfaces } from 'inversify';
 import { App } from './app';
 import type { ErrorFilter, Guard, Interceptor, MangoPlugin, MultiplayerService } from './interfaces';
 import type { Pipe } from '../interfaces';
@@ -31,18 +30,24 @@ import { Module, ModuleMetadataReader } from './module';
 import { AppRuntime, ModuleDependencyBinder, ModuleTreeScanner } from './module-tree';
 import { Controller } from './controller';
 import { ExecutionContextBase, MangoRequestBase, MangoResponseBase } from './pipeline';
-import type { ExecutionContextType } from './enums';
+import type { AppEnviroment, ExecutionContextType } from './enums';
 import { REFLECTOR_SERVICE } from '../constants';
 import { ReflectorService } from '../services';
+import type { AppBuilderConfig } from '../interfaces/core/app-builder-config.interface';
 
-@injectable()
 export class AppBuilder<G extends Guard = Guard, I extends Interceptor = Interceptor, EF extends ErrorFilter = ErrorFilter> {
-    @inject(APP_ENVIROMENT) protected readonly enviroment: string;
-    @inject(INTERNAL_APP_CONTAINER) protected readonly internalAppContainer: Container;
-    @inject(MULTIPLAYER_SERVICE) protected readonly multiplayerService: MultiplayerService;
-    @inject(PLUGINS) protected readonly plugins: Newable<MangoPlugin>[];
-
+    protected readonly enviroment: AppEnviroment;
+    protected readonly internalAppContainer: Container;
+    protected readonly multiplayerService: MultiplayerService;
+    protected readonly plugins: Newable<MangoPlugin>[];
     private globalContainerOptions: interfaces.ContainerOptions = {};
+
+    constructor(config: AppBuilderConfig) {
+        this.enviroment = config.enviroment;
+        this.internalAppContainer = config.internalAppContainer;
+        this.multiplayerService = config.multiplayerService;
+        this.plugins = config.plugins;
+    }
 
     public useGlobalGuards(...guards: (Newable<G> | G)[]) {
         const validatedGuards: (Newable<G> | G)[] = [];

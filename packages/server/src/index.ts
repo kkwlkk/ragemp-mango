@@ -5,7 +5,7 @@ import { ServerRageMPMultiplayerService } from './multiplayer/ragemp';
 
 const multiplayerService: ServerMultiplayerService = new ServerRageMPMultiplayerService();
 
-export class ServerAppBuilder extends AppBuilder<Guard, Interceptor, ErrorFilter> {
+class ServerAppBuilder extends AppBuilder<Guard, Interceptor, ErrorFilter> {
     public setBlipFactory(factory: unknown) {
         multiplayerService.setBlipFactory(factory);
     }
@@ -51,13 +51,13 @@ export class ServerAppBuilder extends AppBuilder<Guard, Interceptor, ErrorFilter
     }
 }
 
-export async function createAppBuilder(): Promise<ServerAppBuilder> {
+export async function createAppBuilder() {
     return await $createAppBuilder({
         enviroment: AppEnviroment.Server,
         plugins: [ServiceBinderPlugin, PlayerPrototypePlugin, RPCPlugin],
         appBuilderInherit: ServerAppBuilder,
         multiplayerService
-    }) as ServerAppBuilder;
+    });
 }
 
 export * from './exports';
