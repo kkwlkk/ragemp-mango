@@ -1,5 +1,11 @@
 # @ragemp-mango/core
 
+## 1.2.1
+
+### Patch Changes
+
+-   c87f80a: fix: appBuilder binding
+
 ## 1.2.0
 
 ### Minor Changes
