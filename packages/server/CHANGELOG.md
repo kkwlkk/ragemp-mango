@@ -1,5 +1,11 @@
 # @ragemp-mango/server
 
+## 2.0.1
+
+### Patch Changes
+
+-   9e33d8b: Bump to use newest core version with LazyServiceIdentifier typo fix
+
 ## 2.0.0
 
 ### Minor Changes
