@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-import { MULTIPLAYER_SERVICE, PLUGINS } from './constants';
+import { INTERNAL_APP_CONTAINER, MULTIPLAYER_SERVICE, PLUGINS } from './constants';
 import type { Newable } from '../types';
 import type { MangoPlugin, MultiplayerService } from './interfaces';
 import type { AppEnviroment } from './enums';
@@ -18,6 +18,8 @@ export async function createAppBuilder<T extends AppBuilder>({
     multiplayerService?: MultiplayerService;
 }): Promise<T> {
     const internalAppContainer = new Container();
+
+    internalAppContainer.bind(INTERNAL_APP_CONTAINER).toConstantValue(internalAppContainer);
 
     if (multiplayerService) internalAppContainer.bind(MULTIPLAYER_SERVICE).toConstantValue(multiplayerService);
     internalAppContainer.bind(PLUGINS).toConstantValue(plugins);
