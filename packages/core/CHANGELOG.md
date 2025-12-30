@@ -1,5 +1,11 @@
 # @ragemp-mango/core
 
+## 1.2.0
+
+### Minor Changes
+
+-   09b1422: feat: make AppBuilder bundle-friendly
+
 ## 1.1.1
 
 ### Patch Changes
