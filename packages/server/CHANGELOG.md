@@ -1,5 +1,11 @@
 # @ragemp-mango/server
 
+## 2.0.2
+
+### Patch Changes
+
+-   0899bd9: Fix missing types not returned by ServerAppBuilder
+
 ## 2.0.1
 
 ### Patch Changes
