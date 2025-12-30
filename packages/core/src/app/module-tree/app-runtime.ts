@@ -37,7 +37,7 @@ export class AppRuntime {
             );
 
             // Log module loaded.
-            this.loggerService.log(`~lw~Module ~lb~${module.metadata.classRef.name} ~lw~loaded ~lk~(${Date.now() - startTime}ms)`);
+            this.loggerService.log(`Module ${module.metadata.classRef.name} loaded (${Date.now() - startTime}ms)`);
             await this.runLifecycleMethod(module, 'onModuleInit');
         });
         // await this.runLifecycleMethods(resolvedTree, 'onModuleInit');
@@ -51,7 +51,7 @@ export class AppRuntime {
                 this.registerTimers(controller);
                 this.registerListeners(controller);
                 this.loggerService.log(
-                    `~lw~Controller ~lc~${controller.metadata.classRef.name} ~lw~timers and listeners registered ~lk~(${Date.now() - time}ms)`,
+                    `Controller ${controller.metadata.classRef.name} timers and listeners registered (${Date.now() - time}ms)`,
                 );
             });
         });

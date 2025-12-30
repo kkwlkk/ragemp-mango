@@ -60,7 +60,7 @@ export class ModuleDependencyBinder {
             module.container.bind(TIMER_SERVICE).to(TimerService).inSingletonScope();
 
             this.loggerService.log(
-                `~lw~Module ~lb~${module.metadata.classRef.name} ~lw~dependencies binded ~lk~(${Date.now() - startTime}ms)`,
+                `Module ${module.metadata.classRef.name} dependencies binded (${Date.now() - startTime}ms)`,
             );
         });
     }

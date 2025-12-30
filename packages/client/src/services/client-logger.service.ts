@@ -7,7 +7,7 @@ import { MULTIPLAYER_SERVICE, type MultiplayerService } from '../../../core/src/
 export class ClientLoggerService implements LoggerService {
     @inject(MULTIPLAYER_SERVICE) private readonly multiplayerService: MultiplayerService;
     public log(...args: unknown[]): void {
-        this.multiplayerService.log(`~w~[~y~${MANGO_LOG_PREFIX}Client~w~][~lb~Log~w~]`, ...args);
+        this.multiplayerService.log(`[${MANGO_LOG_PREFIX}Client][Log]`, ...args);
     }
 
     public warn(...args: unknown[]): void {
@@ -19,6 +19,6 @@ export class ClientLoggerService implements LoggerService {
     }
 
     public debug(...args: unknown[]): void {
-        this.multiplayerService.logDebug(`~w~[~y~${MANGO_LOG_PREFIX}Client~w~][~lc~Debug~w~]`, ...args);
+        this.multiplayerService.logDebug(`[${MANGO_LOG_PREFIX}Client][Debug]`, ...args);
     }
 }

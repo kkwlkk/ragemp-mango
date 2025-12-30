@@ -23,7 +23,7 @@ export class ModuleTreeScanner {
         const module = new Module();
         module.metadata = moduleMetadata;
         // Log module info
-        this.loggerService.log(`~lw~Module ~lb~${module.metadata.classRef.name} ~lw~scanned ~lk~(${Date.now() - startTime}ms)`);
+        this.loggerService.log(`Module ${module.metadata.classRef.name} scanned (${Date.now() - startTime}ms)`);
         // Scan controllers in module
         await this.scanControllers(module);
         // Scan controllers in module
@@ -60,7 +60,7 @@ export class ModuleTreeScanner {
         module.metadata = moduleMetadata;
         module.parent = parentNode.value;
         // Log module info
-        this.loggerService.log(`~lw~Module ~lb~${module.metadata.classRef.name} ~lw~scanned ~lk~(${Date.now() - startTime}ms)`);
+        this.loggerService.log(`Module ${module.metadata.classRef.name} scanned (${Date.now() - startTime}ms)`);
         // Scan controllers in module
         await this.scanControllers(module);
         // Add module to tree
@@ -84,7 +84,7 @@ export class ModuleTreeScanner {
             controller.owner = module;
             module.controllers.push(controller);
 
-            this.loggerService.log(`~lw~Controller ~lc~${classRef.name} ~lw~scanned ~lk~(${Date.now() - startTime}ms)`);
+            this.loggerService.log(`Controller ${classRef.name} scanned (${Date.now() - startTime}ms)`);
         }
     }
 

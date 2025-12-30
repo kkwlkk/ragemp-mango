@@ -26,26 +26,26 @@ export class App {
             this.loggerService.error('Error occurred while starting the app.');
             throw new Error(ErrorMessage.AppAlreadyLoaded);
         }
-        this.loggerService.log('~lw~Starting app...');
+        this.loggerService.log('Starting app...');
         await this.runPluginMethods('beforeStart');
 
-        this.loggerService.log('~lw~Scanning module tree...');
+        this.loggerService.log('Scanning module tree...');
         await this.runPluginMethods('beforeScan');
         this.moduleTree = await this.moduleTreeScanner.scan(rootModule);
         await this.runPluginMethods('afterScan');
 
-        this.loggerService.log('~lw~Binding module dependencies...');
+        this.loggerService.log('Binding module dependencies...');
         await this.runPluginMethods('beforeBind');
         await this.moduleDependencyBinder.bind(this.moduleTree);
         await this.runPluginMethods('afterBind');
 
-        this.loggerService.log('~lw~Loading app...');
+        this.loggerService.log('Loading app...');
         await this.runPluginMethods('beforeLoad');
         await this.appRuntime.boot(this.moduleTree);
         this.loaded = true;
         await this.runPluginMethods('afterLoad');
 
-        this.loggerService.log('~lw~App loaded');
+        this.loggerService.log('App loaded');
 
         await this.runPluginMethods('afterStart');
     }
@@ -56,10 +56,10 @@ export class App {
             throw new Error(ErrorMessage.AppNotLoaded);
         }
         await this.runPluginMethods('beforeStop');
-        this.loggerService.log('~lw~Stopping app...');
+        this.loggerService.log('Stopping app...');
         await this.appRuntime.shutdown(this.moduleTree);
         this.loaded = false;
-        this.loggerService.log('~lw~App stopped');
+        this.loggerService.log('App stopped');
         await this.runPluginMethods('afterStop');
     }
 
