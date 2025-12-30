@@ -11,6 +11,9 @@ importers:
       '@changesets/cli':
         specifier: ^2.29.8
         version: 2.29.8(@types/node@20.19.27)
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
       turbo:
         specifier: ^1.13.3
         version: 1.13.4
@@ -24,9 +27,6 @@ importers:
         specifier: ^6.0.2
         version: 6.2.2(reflect-metadata@0.2.2)
     devDependencies:
-      '@abraham/reflection':
-        specifier: ^0.12.0
-        version: 0.12.0
       '@ragemp-mango/core':
         specifier: workspace:^
         version: link:../core
@@ -57,6 +57,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@abraham/reflection':
+        specifier: ^0.12.0
+        version: 0.12.0
       '@ragempcommunity/types-cef':
         specifier: ^2.1.8
         version: 2.1.9
@@ -73,9 +76,6 @@ importers:
         specifier: ^6.0.2
         version: 6.2.2(reflect-metadata@0.2.2)
     devDependencies:
-      '@abraham/reflection':
-        specifier: ^0.12.0
-        version: 0.12.0
       '@microsoft/api-extractor':
         specifier: ^7.43.4
         version: 7.55.2(@types/node@20.19.27)
@@ -149,9 +149,6 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
     devDependencies:
-      '@abraham/reflection':
-        specifier: ^0.12.0
-        version: 0.12.0
       '@ragemp-mango/core':
         specifier: workspace:^
         version: link:../core
@@ -192,9 +189,6 @@ importers:
         specifier: ^2.1.8
         version: 2.1.9
     devDependencies:
-      '@abraham/reflection':
-        specifier: ^0.12.0
-        version: 0.12.0
       '@ragemp-mango/core':
         specifier: workspace:^
         version: link:../core
@@ -3241,6 +3235,11 @@ packages:
   human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+
+  husky@9.1.7:
+    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   iconv-lite@0.7.1:
     resolution: {integrity: sha512-2Tth85cXwGFHfvRgZWszZSvdo+0Xsqmw8k8ZwxScfcBneNUraK+dxRxRm24nszx80Y0TVio8kKLt5sLE7ZCLlw==}
@@ -8417,6 +8416,8 @@ snapshots:
   human-id@4.1.3: {}
 
   human-signals@2.1.0: {}
+
+  husky@9.1.7: {}
 
   iconv-lite@0.7.1:
     dependencies:

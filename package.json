@@ -1,21 +1,23 @@
 {
-        "name": "ragemp-mango",
-        "private": true,
-        "license": "MIT",
-        "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
-        "description": "A decorator-driven TypeScript framework for RageMP multiplayer game servers. Port of the original altv-mango framework.",
-        "scripts": {
-                "build": "turbo run build --filter=@ragemp-mango/* --filter=!@ragemp-mango/docs",
-                "build-test": "turbo run build --filter=@ragemp-resource/*",
-                "dev": "turbo run dev --filter=@ragemp-mango/*",
-                "dev-test": "turbo run dev --filter=@ragemp-resource/*",
-                "publish": "pnpm run build --force && pnpm run types --force && pnpm publish --access public --no-git-checks --filter \"@ragemp-mango/core\" --filter \"@ragemp-mango/server\" --filter \"@ragemp-mango/client\" --filter \"@ragemp-mango/webview\"",
-                "typecheck": "turbo run typecheck --filter=@ragemp-mango/*",
-                "typecheck-test": "turbo run typecheck --filter=@ragemp-resource/*",
-                "types": "turbo run types --filter=@ragemp-mango/*"
-        },
-        "devDependencies": {
-                "@changesets/cli": "^2.29.8",
-                "turbo": "^1.13.3"
-        }
+  "name": "ragemp-mango",
+  "private": true,
+  "license": "MIT",
+  "author": "5exyGuy (Aurėjus Remeika), wlk (https://github.com/kkwlkk)",
+  "description": "A decorator-driven TypeScript framework for RageMP multiplayer game servers. Port of the original altv-mango framework.",
+  "scripts": {
+    "build": "turbo run build --filter=@ragemp-mango/* --filter=!@ragemp-mango/docs",
+    "build-test": "turbo run build --filter=@ragemp-resource/*",
+    "dev": "turbo run dev --filter=@ragemp-mango/*",
+    "dev-test": "turbo run dev --filter=@ragemp-resource/*",
+    "publish": "pnpm run build --force && pnpm run types --force && pnpm publish --access public --no-git-checks --filter \"@ragemp-mango/core\" --filter \"@ragemp-mango/server\" --filter \"@ragemp-mango/client\" --filter \"@ragemp-mango/webview\"",
+    "typecheck": "turbo run typecheck --filter=@ragemp-mango/*",
+    "typecheck-test": "turbo run typecheck --filter=@ragemp-resource/*",
+    "types": "turbo run types --filter=@ragemp-mango/*",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8",
+    "husky": "^9.1.7",
+    "turbo": "^1.13.3"
+  }
 }
