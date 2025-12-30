@@ -33,7 +33,7 @@ export default defineConfig({
     outDir: 'dist',
     bundle: true,
     minify: false,
-    external: [...Object.keys(packageJson.dependencies)],
+    external: Object.keys(packageJson.dependencies).filter((dep) => dep !== '@abraham/reflection'),
     dts: true,
     noExternal: Object.keys(packageJson.devDependencies),
     // esbuildPlugins: [polyfillNode()],
