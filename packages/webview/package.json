@@ -24,7 +24,6 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "@abraham/reflection": "^0.12.0",
         "@ragemp-mango/core": "workspace:^",
         "tsup": "^8.0.2",
         "typescript": "^5.4.5"

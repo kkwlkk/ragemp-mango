@@ -1,4 +1,4 @@
-/// <reference types="@abraham/reflection" />
+import '@abraham/reflection';
 
 export * from './constants';
 export * from './decorators';
