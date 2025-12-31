@@ -77,6 +77,14 @@ export class RageMPWebView implements MultiplayerWebView {
         }
     }
 
+    execute(code: string): void {
+        this.$raw.execute(code);
+    }
+
+    markAsChat(): void {
+        this.$raw.markAsChat();
+    }
+
     public get raw(): BrowserMp {
         return this.$raw;
     }

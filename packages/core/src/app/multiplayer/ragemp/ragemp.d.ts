@@ -35,15 +35,7 @@ declare global {
             toArray(): VehicleMp[];
             length: number;
         };
-        browsers: {
-            new(url: string): BrowserMp;
-            newHeadless(url: string, width: number, height: number, forceFlip?: boolean): BrowserMp;
-            at(index: number): BrowserMp | undefined;
-            exists(entity: BrowserMp): boolean;
-            forEach(callback: (browser: BrowserMp) => void): void;
-            toArray(): BrowserMp[];
-            length: number;
-        };
+        browsers: BrowserPool;
         blips: {
             new(model: number, position: Vector3Mp, options?: object): BlipMp;
             at(index: number): BlipMp | undefined;
@@ -218,6 +210,17 @@ declare global {
         callProc<T = any>(procName: string, ...args: any[]): Promise<T>;
         reload(ignoreCache: boolean): void;
         destroy(): void;
+        markAsChat(): void;
+    }
+
+    interface BrowserPool {
+        'new'(url: string): BrowserMp;
+        newHeadless(url: string, width: number, height: number, forceFlip?: boolean): BrowserMp;
+        at(index: number): BrowserMp | undefined;
+        exists(entity: BrowserMp): boolean;
+        forEach(callback: (browser: BrowserMp) => void): void;
+        toArray(): BrowserMp[];
+        length: number;
     }
 
     interface BlipMp extends EntityMp {

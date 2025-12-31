@@ -13,12 +13,16 @@ export interface MultiplayerWebViewCreateOptionsDrawable {
 export interface MultiplayerWebView {
     readonly valid: boolean;
     url: string;
+    visible: boolean;
     destroy(): void;
     reload(ignoreCache: boolean): void;
     emit(eventName: string, ...args: unknown[]): void;
+    emitRaw(eventName: string, ...args: unknown[]): void;
     on(eventName: string, listener: (...args: unknown[]) => void): void;
     once(eventName: string, listener: (...args: unknown[]) => void): void;
     off(eventName: string, listener: (...args: unknown[]) => void): void;
+    execute(code: string): void;
+    markAsChat(): void;
 }
 
 export interface MultiplayerWebViewManager {
