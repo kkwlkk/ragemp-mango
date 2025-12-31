@@ -1,5 +1,12 @@
 # @ragemp-mango/webview
 
+## 5.0.0
+
+### Patch Changes
+
+-   Updated dependencies [5cdcbe7]
+    -   @ragemp-mango/core@3.2.0
+
 ## 4.0.0
 
 ### Minor Changes
