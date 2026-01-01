@@ -88,9 +88,22 @@ export class ServerRageMPEventEmmiter implements ServerEventEmmiter {
         if (NATIVE_SERVER_EVENTS.has(eventName as NativeServerEvent)) {
             return this.on(eventName, listener);
         }
-        // Custom client-to-server events
-        mp.events.add(eventName, listener);
-        return new RageMPServerScriptEvent(eventName, listener);
+        // Custom client-to-server events - data is JSON stringified from client
+        const wrapper = (player: PlayerMp, ...args: any[]) => {
+            const parsedArgs = args.map(arg => {
+                if (typeof arg === 'string') {
+                    try {
+                        return JSON.parse(arg);
+                    } catch {
+                        return arg;
+                    }
+                }
+                return arg;
+            });
+            listener(player, ...parsedArgs);
+        };
+        mp.events.add(eventName, wrapper);
+        return new RageMPServerScriptEvent(eventName, wrapper);
     }
 
     oncePlayer(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
@@ -98,10 +111,20 @@ export class ServerRageMPEventEmmiter implements ServerEventEmmiter {
         if (NATIVE_SERVER_EVENTS.has(eventName as NativeServerEvent)) {
             return this.once(eventName, listener);
         }
-        // Custom client-to-server events
-        const onceWrapper = (...args: any[]) => {
+        // Custom client-to-server events - data is JSON stringified from client
+        const onceWrapper = (player: PlayerMp, ...args: any[]) => {
             mp.events.remove(eventName, onceWrapper);
-            listener(...args);
+            const parsedArgs = args.map(arg => {
+                if (typeof arg === 'string') {
+                    try {
+                        return JSON.parse(arg);
+                    } catch {
+                        return arg;
+                    }
+                }
+                return arg;
+            });
+            listener(player, ...parsedArgs);
         };
         mp.events.add(eventName, onceWrapper);
         return new RageMPServerScriptEvent(eventName, onceWrapper);

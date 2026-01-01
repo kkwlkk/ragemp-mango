@@ -46,7 +46,9 @@ export class ClientRageMPEventEmmiter implements ClientEventEmmiter {
 
     emitServer(eventName: string, ...args: any[]): void {
         // In RageMP, use mp.events.callRemote to send events to server
-        mp.events.callRemote(eventName, ...args);
+        // Data must be JSON stringified because RAGE:MP doesn't properly serialize complex objects
+        const serializedArgs = args.map(arg => JSON.stringify(arg));
+        mp.events.callRemote(eventName, ...serializedArgs);
     }
 
     onServer(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
