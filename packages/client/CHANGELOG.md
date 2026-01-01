@@ -1,5 +1,11 @@
 # @ragemp-mango/client
 
+## 5.1.1
+
+### Patch Changes
+
+-   7f84491: fix: datatransfer
+
 ## 5.1.0
 
 ### Minor Changes
