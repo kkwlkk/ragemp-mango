@@ -1,5 +1,11 @@
 # @ragemp-mango/client
 
+## 5.1.2
+
+### Patch Changes
+
+-   0478977: fix: serialization
+
 ## 5.1.1
 
 ### Patch Changes
