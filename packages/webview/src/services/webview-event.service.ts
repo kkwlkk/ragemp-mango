@@ -159,11 +159,12 @@ export class WebViewEventService implements EventService {
 
     public emitServer<E extends string>(eventName: E, body?: unknown) {
         // In RageMP, we emit to client which then forwards to server
+        // Data must be JSON stringified because RAGE:MP doesn't properly serialize objects via mp.trigger
         if (typeof (window as any).mp !== 'undefined') {
-            (window as any).mp.trigger('WEBVIEW::EMIT_SERVER', {
+            (window as any).mp.trigger('WEBVIEW::EMIT_SERVER', JSON.stringify({
                 eventName,
                 payload: body,
-            });
+            }));
         }
     }
 }
