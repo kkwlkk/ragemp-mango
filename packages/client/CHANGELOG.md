@@ -1,5 +1,11 @@
 # @ragemp-mango/client
 
+## 5.1.0
+
+### Minor Changes
+
+-   ea4bed7: fix data transfer
+
 ## 5.0.0
 
 ### Minor Changes
