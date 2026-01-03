@@ -1,5 +1,13 @@
 # @ragemp-mango/throttler
 
+## 6.0.0
+
+### Patch Changes
+
+-   Updated dependencies [5c1bda8]
+    -   @ragemp-mango/server@6.0.0
+    -   @ragemp-mango/core@3.3.0
+
 ## 5.0.0
 
 ### Patch Changes
