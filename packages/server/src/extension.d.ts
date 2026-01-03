@@ -4,10 +4,10 @@ import type { RPCCallOptions, RPCResult } from '@ragemp-mango/core';
 
 declare global {
     interface PlayerMp {
-        emitWebView<E extends keyof MangoEvents.CustomServerToPlayerEvent>(eventName: E, body?: unknown): void;
+        emitWebView<E extends keyof MangoEvents.CustomServerToPlayerEvent>(eventName: E | string, body?: unknown): void;
         emitWebView<E extends string>(
             id: string | number,
-            eventName: Exclude<E, keyof MangoEvents.CustomServerToPlayerEvent>,
+            eventName: Exclude<E, keyof MangoEvents.CustomServerToPlayerEvent> | string,
             body?: unknown,
         ): void;
         callRpc<E extends keyof MangoRPC.CustomServerToPlayerRpcEvent>(eventName: E, body?: unknown): void;

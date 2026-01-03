@@ -106,13 +106,13 @@ export interface EventService {
     emitWebViews<E extends keyof MangoEvents.CustomServerToWebViewEvent, U extends MultiplayerPlayer>(
         player: U[],
         id: string | number,
-        eventName: E,
+        eventName: E | string,
         body?: Parameters<MangoEvents.CustomServerToWebViewEvent[E]>[0],
     ): void;
     emitWebViews<E extends string, U extends MultiplayerPlayer>(
         player: U[],
         id: string | number,
-        eventName: Exclude<E, keyof MangoEvents.CustomServerToWebViewEvent>,
+        eventName: Exclude<E, keyof MangoEvents.CustomServerToWebViewEvent> | string,
         body?: unknown,
     ): void;
 

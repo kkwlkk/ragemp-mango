@@ -15,12 +15,17 @@ export class EventMediatorPlugin implements MangoPlugin {
         const time = Date.now();
 
         this.eventService.onServer('SERVER::EMIT_WEBVIEW', (body) => {
-            this.webViewService.get(body.id)?.emit(`WEBVIEW::ON_SERVER_${body.eventName}`, body.payload);
+            const webView = this.webViewService.get(body.id);
+            if (webView) {
+                webView.emit(body.eventName, body.payload);
+            } else {
+                mp.console.logWarning(`[EventMediator] WebView ${body.id} not found!`);
+            }
         });
 
         this.webViewService.$onCreate((id, webView) => {
-            webView.on('WEBVIEW::EMIT_SERVER', (data: string) => {
-                // Data is JSON stringified from webview because RAGE:MP doesn't properly serialize objects
+            webView.on('WEBVIEW::EMIT_SERVER', (...args: unknown[]) => {
+                const data = args[0] as string;
                 const body = JSON.parse(data) as { eventName: string; payload: unknown };
                 this.eventService.emitServer(`SERVER::ON_WEBVIEW_${body.eventName}_${id}`, body.payload);
             });

@@ -62,33 +62,31 @@ export class ServerRageMPEventEmmiter implements ServerEventEmmiter {
     }
 
     emitPlayer(player: MultiplayerPlayer, eventName: string, ...args: any[]): void {
-        // In RageMP, player.call() is used to emit events to clients
-        (player as any).call(eventName, args);
+        const serializedArgs = args.map(arg => JSON.stringify(arg));
+        (player as any).call(eventName, serializedArgs);
     }
 
     emitAllPlayersRaw(eventName: string, ...args: any[]): void {
-        // In RageMP, use mp.players.call() to emit to all players
-        mp.players.call(eventName, args);
+        const serializedArgs = args.map(arg => JSON.stringify(arg));
+        mp.players.call(eventName, serializedArgs);
     }
 
     emitAllPlayersUnreliableRaw(eventName: string, ...args: any[]): void {
-        // RageMP has callUnreliable for unreliable events
-        mp.players.callUnreliable(eventName, args);
+        const serializedArgs = args.map(arg => JSON.stringify(arg));
+        mp.players.callUnreliable(eventName, serializedArgs);
     }
 
     emitUnreliableRaw(players: MultiplayerPlayer[], eventName: string, ...args: any[]): void {
         for (const player of players) {
-            (player as any).callUnreliable(eventName, args);
+            const serializedArgs = args.map(arg => JSON.stringify(arg));
+            (player as any).callUnreliable(eventName, serializedArgs);
         }
     }
 
     onPlayer(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
-        // Native RAGEMP events should be registered with 'on' type
-        // They are triggered by the game engine, not by client-to-server communication
         if (NATIVE_SERVER_EVENTS.has(eventName as NativeServerEvent)) {
             return this.on(eventName, listener);
         }
-        // Custom client-to-server events - data is JSON stringified from client
         const wrapper = (player: PlayerMp, ...args: any[]) => {
             const parsedArgs = args.map(arg => {
                 if (typeof arg === 'string') {
@@ -107,11 +105,9 @@ export class ServerRageMPEventEmmiter implements ServerEventEmmiter {
     }
 
     oncePlayer(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
-        // Native RAGEMP events should be registered with 'once' type
         if (NATIVE_SERVER_EVENTS.has(eventName as NativeServerEvent)) {
             return this.once(eventName, listener);
         }
-        // Custom client-to-server events - data is JSON stringified from client
         const onceWrapper = (player: PlayerMp, ...args: any[]) => {
             mp.events.remove(eventName, onceWrapper);
             const parsedArgs = args.map(arg => {

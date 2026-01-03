@@ -13,16 +13,27 @@ export class PlayerPrototypePlugin implements MangoPlugin {
         const time = Date.now();
         const Player = this.multiplayerService.getPlayer();
 
+        // Save reference to native call before we override it
+        const nativeCall = Player.prototype.call;
+
+        // Simple event emission to client (uses native call)
+        Player.prototype.emit = function (eventName: string, body?: unknown) {
+            nativeCall.call(this, eventName, [JSON.stringify(body)]);
+        };
+
         Player.prototype.emitWebView = function (id: string | number, eventName: string, body?: unknown) {
-            this.emitRaw('SERVER::EMIT_WEBVIEW', {
-                id,
-                eventName,
-                payload: body,
-            });
+            this.callUnreliable('SERVER::EMIT_WEBVIEW', [
+                JSON.stringify({
+                    id,
+                    eventName,
+                    payload: body,
+                }),
+            ]);
         };
 
         const rpcService = this.globalAppContainer.get<RPCService>(RPC_SERVICE);
 
+        // RPC call (expects response from client)
         Player.prototype.call = function (rpcName: string, body?: unknown, options?: RPCCallOptions) {
             return rpcService.callPlayer(this, rpcName, body, options);
         };

@@ -66,12 +66,12 @@ export interface InternalEventService {
     ): ScriptEventHandler;
     emitWebView<E extends keyof MangoEvents.CustomClientToWebViewEvent>(
         id: string | number,
-        eventName: E,
+        eventName: E | string,
         body?: Parameters<MangoEvents.CustomClientToWebViewEvent[E]>[0],
     ): void;
     emitWebView<E extends string>(
         id: string | number,
-        eventName: Exclude<E, keyof MangoEvents.CustomClientToWebViewEvent>,
+        eventName: Exclude<E, keyof MangoEvents.CustomClientToWebViewEvent> | string,
         body?: unknown,
     ): void;
     // Server
@@ -179,13 +179,13 @@ export interface InternalEventService {
     emitWebViews<E extends keyof MangoEvents.CustomServerToWebViewEvent, U extends PlayerMp>(
         player: U[],
         id: string | number,
-        eventName: E,
+        eventName: E | string,
         body?: Parameters<MangoEvents.CustomServerToWebViewEvent[E]>[0],
     ): void;
     emitWebViews<E extends string, U extends PlayerMp>(
         player: U[],
         id: string | number,
-        eventName: Exclude<E, keyof MangoEvents.CustomServerToWebViewEvent>,
+        eventName: Exclude<E, keyof MangoEvents.CustomServerToWebViewEvent> | string,
         body?: unknown,
     ): void;
 

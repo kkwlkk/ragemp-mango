@@ -21,7 +21,7 @@ export class RPCPlugin implements MangoPlugin {
         const time = Date.now();
 
         this.eventService.onPlayer('RPC::CALL_SERVER', async (player, body) => {
-            if (!player.valid) return;
+            if (!mp.players.exists(player)) return;
 
             const rpcHandler =
                 body.source === EventDestination.Client
@@ -37,7 +37,7 @@ export class RPCPlugin implements MangoPlugin {
                         RPC_RESULT_HANDLER_NOT_FOUND,
                     );
                 } else if (body.source === EventDestination.Client) {
-                    player.emitRaw(`RPC::RETURN_FROM_SERVER_${body.id}`, RPC_RESULT_HANDLER_NOT_FOUND);
+                    player.callUnreliable(`RPC::RETURN_FROM_SERVER_${body.id}`, [JSON.stringify(RPC_RESULT_HANDLER_NOT_FOUND)]);
                 }
                 return;
             }
@@ -52,7 +52,7 @@ export class RPCPlugin implements MangoPlugin {
                 if (body.source === EventDestination.WebView) {
                     player.emitWebView(body.webViewId as string | number, `RPC::RETURN_FROM_SERVER_${body.id}`, rpcResult);
                 } else if (body.source === EventDestination.Client) {
-                    player.emitRaw(`RPC::RETURN_FROM_SERVER_${body.id}`, rpcResult);
+                    player.callUnreliable(`RPC::RETURN_FROM_SERVER_${body.id}`, [JSON.stringify(rpcResult)]);
                 }
             } catch (error) {
                 if (body.source === EventDestination.WebView) {
@@ -73,9 +73,9 @@ export class RPCPlugin implements MangoPlugin {
                             status: error.status,
                             error: { message: error.message, details: error.details },
                         };
-                        player.emitRaw(`RPC::RETURN_FROM_SERVER_${body.id}`, rpcResult);
+                        player.callUnreliable(`RPC::RETURN_FROM_SERVER_${body.id}`, [JSON.stringify(rpcResult)]);
                     } else {
-                        player.emitRaw(`RPC::RETURN_FROM_SERVER_${body.id}`, RPC_RESULT_UNKNOWN);
+                        player.callUnreliable(`RPC::RETURN_FROM_SERVER_${body.id}`, [JSON.stringify(RPC_RESULT_UNKNOWN)]);
                     }
                 }
             }

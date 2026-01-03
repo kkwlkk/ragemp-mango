@@ -4,7 +4,6 @@ import { RageMPClientScriptEvent } from './ragemp-script-event-handler';
 
 export class ClientRageMPEventEmmiter implements ClientEventEmmiter {
     private mapEventsShared: Record<string, string> = {
-        // Map alt:V event names to RageMP equivalents
         'entityColShapeEnter': 'playerEnterColshape',
         'entityColShapeLeave': 'playerExitColshape',
         'keyUp': 'keyup',
@@ -45,36 +44,44 @@ export class ClientRageMPEventEmmiter implements ClientEventEmmiter {
     }
 
     emitServer(eventName: string, ...args: any[]): void {
-        // In RageMP, use mp.events.callRemote to send events to server
-        // Data must be JSON stringified because RAGE:MP doesn't properly serialize complex objects
-        const serializedArgs = args.map(arg => {
-            if (typeof arg === 'string') {
-                // Check if already JSON serialized
-                try {
-                    JSON.parse(arg);
-                    return arg; // Already serialized
-                } catch {
-                    return JSON.stringify(arg); // Plain string, serialize it
-                }
-            }
-            return JSON.stringify(arg);
-        });
+        const serializedArgs = args.map(arg => JSON.stringify(arg));
         mp.events.callRemote(eventName, ...serializedArgs);
     }
 
     onServer(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
-        // In RageMP, server events come through mp.events.add
-        // Events from server are received the same way as local events
         const mappedEventName = this.getEventName(eventName);
-        mp.events.add(mappedEventName, listener);
-        return new RageMPClientScriptEvent(mappedEventName, listener);
+        const wrapper = (...args: any[]) => {
+            const parsedArgs = args.map(arg => {
+                if (typeof arg === 'string') {
+                    try {
+                        return JSON.parse(arg);
+                    } catch {
+                        return arg;
+                    }
+                }
+                return arg;
+            });
+            listener(...parsedArgs);
+        };
+        mp.events.add(mappedEventName, wrapper);
+        return new RageMPClientScriptEvent(mappedEventName, wrapper);
     }
 
     onceServer(eventName: string, listener: (...args: any[]) => void): ScriptEventHandler {
         const mappedEventName = this.getEventName(eventName);
         const onceWrapper = (...args: any[]) => {
             mp.events.remove(mappedEventName, onceWrapper);
-            listener(...args);
+            const parsedArgs = args.map(arg => {
+                if (typeof arg === 'string') {
+                    try {
+                        return JSON.parse(arg);
+                    } catch {
+                        return arg;
+                    }
+                }
+                return arg;
+            });
+            listener(...parsedArgs);
         };
         mp.events.add(mappedEventName, onceWrapper);
         return new RageMPClientScriptEvent(mappedEventName, onceWrapper);

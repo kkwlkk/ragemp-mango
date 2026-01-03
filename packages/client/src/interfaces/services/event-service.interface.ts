@@ -62,12 +62,12 @@ export interface EventService {
     ): ScriptEventHandler;
     emitWebView<E extends keyof MangoEvents.CustomClientToWebViewEvent>(
         id: string | number,
-        eventName: E,
+        eventName: E | string,
         body?: Parameters<MangoEvents.CustomClientToWebViewEvent[E]>[0],
     ): void;
     emitWebView<E extends string>(
         id: string | number,
-        eventName: Exclude<E, keyof MangoEvents.CustomClientToWebViewEvent>,
+        eventName: Exclude<E, keyof MangoEvents.CustomClientToWebViewEvent> | string,
         body?: unknown,
     ): void;
 

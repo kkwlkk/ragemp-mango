@@ -8,19 +8,21 @@ export class WebViewEventService implements EventService {
         eventName: E,
         callback: (body: unknown) => void | Promise<void>,
     ) {
+        let _valid = true;
         const eventHandler: ScriptEventHandler = {
             destroy: () => {
-                // @ts-ignore
-                eventHandler.valid = false;
+                _valid = false;
                 const handlers = this.$localHandlers.get(eventName);
                 handlers?.delete(eventHandler);
             },
-            eventName,
+            get valid() {
+                return _valid;
+            },
             handler: callback,
             local: true,
             onlyOnce: false,
             remote: false,
-            valid: true,
+            eventName,
         };
 
         if (!this.$localHandlers.has(eventName)) {
@@ -35,18 +37,21 @@ export class WebViewEventService implements EventService {
         eventName: E,
         callback: (body: unknown) => void | Promise<void>,
     ) {
-        const eventHandler = {
+        let _valid = true;
+        const eventHandler: ScriptEventHandler = {
             destroy: () => {
-                eventHandler.valid = false;
+                _valid = false;
                 const handlers = this.$localHandlers.get(eventName);
                 handlers?.delete(eventHandler);
             },
-            eventName,
+            get valid() {
+                return _valid;
+            },
             handler: callback,
             local: true,
             onlyOnce: true,
             remote: false,
-            valid: true,
+            eventName,
         };
 
         if (!this.$localHandlers.has(eventName)) {
@@ -54,7 +59,7 @@ export class WebViewEventService implements EventService {
         }
         this.$localHandlers.get(eventName)!.add(eventHandler);
 
-        return <ScriptEventHandler>eventHandler;
+        return eventHandler;
     }
 
     public emit<E extends string>(eventName: E, body?: unknown) {
@@ -70,25 +75,33 @@ export class WebViewEventService implements EventService {
         eventName: E,
         callback: (body: unknown) => void | Promise<void>,
     ) {
-        const wrapper = (...args: any[]) => callback(args[0]);
+        const wrapper = (...args: unknown[]) => {
+            let data = args[0];
+            if (typeof data === 'string') {
+                try {
+                    data = JSON.parse(data);
+                } catch {
+                }
+            }
+            callback(data);
+        };
+        let _valid = true;
         const eventHandler: ScriptEventHandler = {
             destroy: () => {
-                // @ts-ignore
-                eventHandler.valid = false;
+                _valid = false;
                 const handlers = this.$remoteHandlers.get(eventName);
                 handlers?.delete(eventHandler);
-                // In RageMP CEF, we use mp.trigger to communicate
-                // Events are registered via window event listeners or mp.events
             },
-            eventName,
+            get valid() {
+                return _valid;
+            },
             handler: wrapper,
             local: false,
             onlyOnce: false,
             remote: true,
-            valid: true,
+            eventName,
         };
 
-        // RageMP CEF uses window-level event registration
         if (typeof (window as any).mp !== 'undefined') {
             (window as any).mp.events.add(eventName, wrapper);
         }
@@ -105,23 +118,32 @@ export class WebViewEventService implements EventService {
         eventName: E,
         callback: (body: unknown) => void | Promise<void>,
     ) {
-        const wrapper = (...args: any[]) => {
-            callback(args[0]);
+        let _valid = true;
+        const wrapper = (...args: unknown[]) => {
+            let data = args[0];
+            if (typeof data === 'string') {
+                try {
+                    data = JSON.parse(data);
+                } catch {
+                }
+            }
+            callback(data);
             eventHandler.destroy();
         };
         const eventHandler: ScriptEventHandler = {
             destroy: () => {
-                // @ts-ignore
-                eventHandler.valid = false;
+                _valid = false;
                 const handlers = this.$remoteHandlers.get(eventName);
                 handlers?.delete(eventHandler);
+            },
+            get valid() {
+                return _valid;
             },
             eventName,
             handler: wrapper,
             local: false,
             onlyOnce: true,
             remote: true,
-            valid: true,
         };
 
         if (typeof (window as any).mp !== 'undefined') {
@@ -137,7 +159,6 @@ export class WebViewEventService implements EventService {
     }
 
     public emitPlayer<E extends string>(eventName: E, body?: unknown) {
-        // RageMP CEF uses mp.trigger to send events to client
         if (typeof (window as any).mp !== 'undefined') {
             (window as any).mp.trigger(eventName, body);
         }
@@ -147,19 +168,17 @@ export class WebViewEventService implements EventService {
         eventName: E,
         callback: (body: unknown) => void | Promise<void>,
     ) {
-        return this.onPlayer(<string>`WEBVIEW::ON_SERVER_${eventName}`, <any>callback);
+        return this.onPlayer(`WEBVIEW::ON_SERVER_${eventName}`, callback);
     }
 
     public onceServer<E extends string>(
         eventName: E,
         callback: (body: unknown) => void | Promise<void>,
     ): ScriptEventHandler {
-        return this.oncePlayer(<string>`WEBVIEW::ON_SERVER_${eventName}`, <any>callback);
+        return this.oncePlayer(`WEBVIEW::ON_SERVER_${eventName}`, callback);
     }
 
     public emitServer<E extends string>(eventName: E, body?: unknown) {
-        // In RageMP, we emit to client which then forwards to server
-        // Data must be JSON stringified because RAGE:MP doesn't properly serialize objects via mp.trigger
         if (typeof (window as any).mp !== 'undefined') {
             (window as any).mp.trigger('WEBVIEW::EMIT_SERVER', JSON.stringify({
                 eventName,

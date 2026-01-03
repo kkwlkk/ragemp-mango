@@ -24,7 +24,7 @@ export class ServerRPCService extends BaseRPCService<MangoRPC.CustomServerRPC> i
     public readonly $clientHandlers = new Map<string, ScriptRPCHandler>();
     public readonly $webViewHandlers = new Map<string, ScriptRPCHandler>();
 
-    public async callPlayer<E extends string, U extends MultiplayerPlayer>(
+    public async callPlayer<E extends string, U extends PlayerMp & MultiplayerPlayer>(
         player: U,
         rpcName: Exclude<E, keyof MangoRPC.CustomServerToClientRPC>,
         body?: unknown,
@@ -58,7 +58,7 @@ export class ServerRPCService extends BaseRPCService<MangoRPC.CustomServerRPC> i
         return rpcHandler;
     }
 
-    public async callWebView<E extends string, U extends MultiplayerPlayer>(
+    public async callWebView<E extends string, U extends PlayerMp & MultiplayerPlayer>(
         player: U,
         id: string | number,
         rpcName: Exclude<E, keyof MangoRPC.CustomServerToWebViewRPC>,
@@ -99,7 +99,7 @@ export class ServerRPCService extends BaseRPCService<MangoRPC.CustomServerRPC> i
     }
 
     private async $handleCall<TResult>(
-        player: MultiplayerPlayer,
+        player: PlayerMp & MultiplayerPlayer,
         rpcName: string,
         destination: EventDestination, // 'client' | 'webview',
         options?: Partial<RPCCallOptions>,
@@ -123,7 +123,7 @@ export class ServerRPCService extends BaseRPCService<MangoRPC.CustomServerRPC> i
                 }
             });
 
-            const onceHandle = (_player: MultiplayerPlayer, body: unknown) => {
+            const onceHandle = (_player: PlayerMp, body: unknown) => {
                 clearTimeout(timeoutId);
                 disconnectHandler.destroy();
                 resolve(<RPCResult<TResult>>body);

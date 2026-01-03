@@ -31,20 +31,7 @@ export class RageMPWebView implements MultiplayerWebView {
     }
 
     emit(eventName: string, ...args: unknown[]): void {
-        // In RageMP, use browser.call() to send events to CEF
-        // Data must be JSON stringified because RAGE:MP doesn't properly serialize complex objects
-        const serializedArgs = args.map(arg => {
-            if (typeof arg === 'string') {
-                // Check if already JSON serialized
-                try {
-                    JSON.parse(arg);
-                    return arg; // Already serialized
-                } catch {
-                    return JSON.stringify(arg); // Plain string, serialize it
-                }
-            }
-            return JSON.stringify(arg);
-        });
+        const serializedArgs = args.map(arg => JSON.stringify(arg));
         this.$raw.call(eventName, ...serializedArgs);
     }
 
@@ -57,14 +44,11 @@ export class RageMPWebView implements MultiplayerWebView {
     }
 
     on(eventName: string, listener: (...args: unknown[]) => void): void {
-        // In RageMP, we need to listen through mp.events for browser events
-        // We'll create a wrapper that filters by browser instance
         if (!this.eventListeners.has(eventName)) {
             this.eventListeners.set(eventName, new Set());
         }
         this.eventListeners.get(eventName)!.add(listener);
 
-        // Add a global event listener if this is the first for this event
         const listeners = this.eventListeners.get(eventName)!;
         if (listeners.size === 1) {
             mp.events.add(eventName, (...args: unknown[]) => {
