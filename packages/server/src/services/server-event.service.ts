@@ -52,9 +52,8 @@ export class ServerEventService extends BaseEventService<MangoEvents.CustomServe
         eventName: Exclude<E, keyof MangoEvents.CustomServerToPlayerEvent>,
         body?: unknown,
     ): void {
-        const serializedBody = JSON.stringify(body);
         for (const player of players) {
-            player.call(eventName, [serializedBody]);
+            (player as any).emit(eventName, body);
         }
     }
 
@@ -65,7 +64,7 @@ export class ServerEventService extends BaseEventService<MangoEvents.CustomServe
     ): void {
         const serializedBody = JSON.stringify(body);
         for (const player of players) {
-            player.callUnreliable(eventName, [serializedBody]);
+            (player as any).callUnreliable(eventName, [serializedBody]);
         }
     }
 
@@ -99,21 +98,8 @@ export class ServerEventService extends BaseEventService<MangoEvents.CustomServe
         eventName: Exclude<E, keyof MangoEvents.CustomServerToWebViewEvent>,
         body?: unknown,
     ): void {
-        const payload = {
-            id,
-            eventName,
-            payload: body,
-        };
-        console.log(`[ServerEventService] Payload: ${JSON.stringify(payload)}`);
-        // Data must be JSON stringified because RAGE:MP doesn't properly serialize complex objects
-        const serializedBody = JSON.stringify(payload);
         for (const player of players) {
-            const rawPlayer = (player as any).$raw || (player as any)._player || (player as any).player || player;
-
-            try {
-                rawPlayer.call('SERVER::EMIT_WEBVIEW', [serializedBody]);
-            } catch (err) {
-            }
+            (player as any).emitWebView(id, eventName, body);
         }
     }
 
