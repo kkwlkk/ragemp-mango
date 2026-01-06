@@ -1,5 +1,17 @@
 # @ragemp-mango/server
 
+## 6.0.0
+
+### Minor Changes
+
+-   5c1bda8: fix: webview communication and inproper emits
+
+### Patch Changes
+
+-   e4d72a7: fix: communication
+-   Updated dependencies [5c1bda8]
+    -   @ragemp-mango/core@3.3.0
+
 ## 5.0.1
 
 ### Patch Changes

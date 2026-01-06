@@ -1,5 +1,11 @@
 # @ragemp-mango/core
 
+## 3.3.0
+
+### Minor Changes
+
+-   5c1bda8: fix: webview communication and inproper emits
+
 ## 3.2.0
 
 ### Minor Changes

@@ -1,5 +1,14 @@
 # @ragemp-mango/cache
 
+## 6.0.0
+
+### Patch Changes
+
+-   Updated dependencies [5c1bda8]
+-   Updated dependencies [e4d72a7]
+    -   @ragemp-mango/server@6.0.0
+    -   @ragemp-mango/core@3.3.0
+
 ## 5.0.0
 
 ### Patch Changes
